@@ -1,4 +1,4 @@
-uHDR V6.0
+uHDR V7.0
 
 Prérequis
 ---------
