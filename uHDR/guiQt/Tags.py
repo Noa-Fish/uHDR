@@ -55,18 +55,21 @@ class Tags (QFrame):
         self.tagsGroup.setMinimumHeight(400)
 
         # edit tags
-        self.label : QLabel =QLabel('add tag(type, name):')
+        self.label : QLabel = QLabel('add or delete tag(type, name):')
         self.tagTypeName : AdvanceLineEditGroup = AdvanceLineEditGroup({'type':'', 'name': ''})
-        self.ok : QPushButton = QPushButton(' ok ')
+        self.ok : QPushButton = QPushButton(' create ')
+        self.suppr : QPushButton = QPushButton(' delete ')
 
         self.topLayout.addWidget(self.label)
         self.topLayout.addWidget(self.tagTypeName)
         self.topLayout.addWidget(self.ok)
+        self.topLayout.addWidget(self.suppr)
 
         ## callbacks
         self.tagsGroup.toggled.connect(self.CBtagChanged)
         self.tagTypeName.textChanged.connect(self.CBnewtag)
         self.ok.clicked.connect(self.CBaddTag)
+        self.suppr.clicked.connect(self.CBremoveTag)  # Connect to removeTag instead of CBaddTag
 
     # methods
     def newTags(self: Self) -> None : 
@@ -79,18 +82,28 @@ class Tags (QFrame):
                 self.tags[(newType,newName)] =  False
                 self.tagsGroup.addLine({(newType,newName):False}) #type: ignore
                 self.tagChanged.emit((newType,newName),False)
-
-
             else:
-                print(f"ERROR in new tag: ({newType},{newName}) alreday in tags")
+                print(f"ERROR in new tag: ({newType},{newName}) already in tags")
                 pass
         else:
             print("ERROR in new tag: type nor name could be ''")
             pass
-    
-    # -----------------------------------------------------------------
 
-    def setTags(self: Self, tags :dict[tuple[str,str], bool]) -> None: 
+    def removeTags(self: Self) -> None:
+        removeType: str = self.newTag[0]
+        removeName: str = self.newTag[1]
+        if (removeType != '') and (removeName != ''):
+            if (removeType, removeName) in self.tags.keys():
+                if debug: print(f'guiQt.Tags.removeTags() > removing tag: {removeType},{removeName}')
+                del self.tags[(removeType, removeName)]
+                self.tagsGroup.removeLine((removeType, removeName))  # Add method in AdvanceCheckBoxGroup to remove line
+                self.tagChanged.emit((removeType, removeName), False)
+            else:
+                print(f"ERROR in remove tag: ({removeType},{removeName}) not in tags")
+        else:
+            print("ERROR in remove tag: type nor name could be ''")
+
+    def setTags(self: Self, tags: dict[tuple[str,str], bool]) -> None: 
         if debug : print(f'guiQt.Tags.setTags({tags})')
         self.tagsGroup.setValues(tags)
 
@@ -103,7 +116,7 @@ class Tags (QFrame):
         if kv[0] == 'type':
             self.newTag= (kv[1], self.newTag[1])
         elif kv[0] == 'name':
-            self.newTag = (self.newTag[0],kv[1])
+            self.newTag = (self.newTag[0], kv[1])
     # ------------------------------------------------------------------
         
     def CBaddTag(self: Self) -> None:
@@ -111,11 +124,12 @@ class Tags (QFrame):
         self.tagTypeName.setText(['',''])
         self.newTag = ('','')
 
+    def CBremoveTag(self: Self) -> None:
+        self.removeTags()
+        self.tagTypeName.setText(['',''])
+        self.newTag = ('','')
+
     # -----------------------------------------------------------------
     def CBtagChanged(self, key: tuple[str, str], value : bool) -> None:
         if debug : print(f'guiQt.Tags.CBtagChanged({key},{value}) > emit !')
         self.tagChanged.emit(key,value)
-
-
-
-
