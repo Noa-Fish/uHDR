@@ -55,7 +55,7 @@ class Image:
     """color data  +  color space + hdr"""
     # constructor
     # -----------------------------------------------------------------
-    def __init__(self:Image, data: np.ndarray, space: ColorSpace = ColorSpace.sRGB, isHdr: bool = False):
+    def __init__(self: Image, data: np.ndarray, space: ColorSpace = ColorSpace.sRGB, isHdr: bool = False):
 
         self.cSpace : ColorSpace = space
         self.cData : np.ndarray = data
@@ -74,17 +74,18 @@ class Image:
     # -----------------------------------------------------------------
     def write(self: Image, fileName : str):
         """write image to system."""
-
-        colour.write_image((self.cData*255.0).astype(np.uint8), fileName,  bit_depth='uint8', method= 'Imageio')
+        ext = os.path.splitext(fileName)[1].lower()
+        if ext in ['.hdr', '.exr']:
+            colour.write_image(self.cData, fileName, bit_depth='float32', method='Imageio')
+        else:
+            colour.write_image((self.cData * 255.0).astype(np.uint8), fileName, bit_depth='uint8', method='Imageio')
     # -----------------------------------------------------------------
-    def buildThumbnail(self: Image, maxSize :int= 800) -> Image:
+    def buildThumbnail(self: Image, maxSize: int = 800) -> Image:
         """build a thumbnail image."""
-        
-        y, x, _ =  self.cData.shape
-        factor : int = maxSize/max(y,x)
-        if factor<1:
-            thumbcData = skimage.transform.resize(self.cData, (int(y * factor),int(x*factor) ))
-
+        y, x, _ = self.cData.shape
+        factor: float = maxSize / max(y, x)
+        if factor < 1:
+            thumbcData = skimage.transform.resize(self.cData, (int(y * factor), int(x * factor)))
             return Image(thumbcData, self.cSpace, self.hdr)
         else:
             return deepcopy(self)
@@ -95,13 +96,13 @@ class Image:
     @staticmethod
     def read(fileName : str) -> Image:
         """read image from system."""
-        img : Image 
         path, name, ext = filenamesplit(fileName)
         if os.path.exists(fileName):
-            if ext == "jpg" :
-                imgData :  np.ndarray = colour.read_image(fileName, bit_depth='float32', method= 'Imageio')
-                img = Image(imgData, ColorSpace.sRGB, False)
+            if ext in ["jpg", "jpeg"]:
+                imgData: np.ndarray = colour.read_image(fileName, bit_depth='float32', method='Imageio')
+                return Image(imgData, ColorSpace.sRGB, False)
+            elif ext in ["hdr", "exr", "tiff"]:
+                imgData: np.ndarray = colour.read_image(fileName, bit_depth='float32', method='Imageio')
+                return Image(imgData, ColorSpace.sRGB, True)
         else:
-            img = Image(np.ones((600,800,3))*0.50, ColorSpace.sRGB, False)
-        return img
-    # -----------------------------------------------------------------
+            return Image(np.ones((600, 800, 3)) * 0.50, ColorSpace.sRGB, False)
