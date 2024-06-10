@@ -1,0 +1,983 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Index &mdash; uHDR 0.9 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!-- <link rel="stylesheet" href="_static/pygments.css" type="text/css" /> -->
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="index" title="Index" href="#" />
+    <link rel="search" title="Search" href="search.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+  <!-- Preload the theme fonts -->
+
+<link rel="preload" href="_static/fonts/FreightSans/freight-sans-book.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="_static/fonts/FreightSans/freight-sans-medium.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="_static/fonts/IBMPlexMono/IBMPlexMono-Medium.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="_static/fonts/FreightSans/freight-sans-bold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="_static/fonts/FreightSans/freight-sans-medium-italic.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="_static/fonts/IBMPlexMono/IBMPlexMono-SemiBold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+
+<!-- Preload the katex fonts -->
+
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Math-Italic.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Main-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Main-Bold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size1-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size4-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size2-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size3-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Caligraphic-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+</head>
+
+<div class="container-fluid header-holder tutorials-header" id="header-holder">
+  <div class="container">
+    <div class="header-container">
+      <a class="header-logo" href="https://github.com/mpariente/asteroid" aria-label="PyTorch">
+       <!-- <img class="call-to-action-img" src="_static/images/asteroid_logo_dark.png"/> -->
+      </a>
+
+      <div class="main-menu">
+        <ul>
+          <li>
+            <a href="https://pytorch.org/get-started">Get Started</a>
+          </li>
+
+          <li>
+            <a href="https://pytorch.org/blog/">Blog</a>
+          </li>
+
+          <li>
+            <a href="https://pytorch.org/tutorials">Tutorials</a>
+          </li>
+
+          <li>
+            <a href="https://pytorch.org/docs/stable/index.html">Docs</a>
+          </li>
+
+          <li>
+            <div class="resources-dropdown">
+              <a id="resourcesDropdownButton" data-toggle="resources-dropdown">
+                Resources
+              </a>
+              <div class="resources-dropdown-menu">
+                <a class="nav-dropdown-item" href="https://pytorch.org/resources"">
+                  <span class=dropdown-title>Developer Resources</span>
+                  <p>Find resources and get questions answered</p>
+                </a>
+                <!--
+                <a class="nav-dropdown-item" href="https://pytorch.org/features">
+                  <span class=dropdown-title>About</span>
+                  <p>Learn about PyTorch’s features and capabilities</p>
+                </a>
+                -->
+              </div>
+            </div>
+          </li>
+
+          <li>
+            <a href="https://github.com/mpariente/asteroid">Github</a>
+          </li>
+        </ul>
+      </div>
+
+      <a class="main-menu-open-button" href="#" data-behavior="open-mobile-menu"></a>
+    </div>
+
+  </div>
+</div>
+
+
+<body class="pytorch-body">
+
+   
+
+    
+
+    <div class="table-of-contents-link-wrapper">
+      <span>Table of Contents</span>
+      <a href="#" class="toggle-table-of-contents" data-behavior="toggle-table-of-contents"></a>
+    </div>
+
+    <nav data-toggle="wy-nav-shift" class="pytorch-left-menu" id="pytorch-left-menu">
+      <div class="pytorch-side-scroll">
+        <div class="pytorch-menu pytorch-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          <div class="pytorch-left-menu-search">
+            
+
+            
+              
+              
+            
+
+            
+
+
+  
+
+
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search Docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+            
+          </div>
+
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">uHDR_documente</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <div class="pytorch-container">
+      <div class="pytorch-page-level-bar" id="pytorch-page-level-bar">
+        <div class="pytorch-breadcrumbs-wrapper">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="pytorch-breadcrumbs">
+    
+      <li>
+        <a href="index.html">
+          
+            Docs
+          
+        </a> &gt;
+      </li>
+
+        
+      <li>Index</li>
+    
+    
+      <li class="pytorch-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+</div>
+        </div>
+
+        <div class="pytorch-shortcuts-wrapper" id="pytorch-shortcuts-wrapper">
+          Shortcuts
+        </div>
+      </div>
+
+      <section data-toggle="wy-nav-shift" id="pytorch-content-wrap" class="pytorch-content-wrap">
+        <div class="pytorch-content-left">
+
+        
+          
+          <div class="rst-content">
+          
+            <div role="main" class="main-content" itemscope="itemscope" itemtype="http://schema.org/Article">
+             <article itemprop="articleBody" id="pytorch-article" class="pytorch-article">
+              
+
+<h1 id="index">Index</h1>
+
+<div class="genindex-jumpbox">
+ <a href="#A"><strong>A</strong></a>
+ | <a href="#B"><strong>B</strong></a>
+ | <a href="#C"><strong>C</strong></a>
+ | <a href="#D"><strong>D</strong></a>
+ | <a href="#E"><strong>E</strong></a>
+ | <a href="#F"><strong>F</strong></a>
+ | <a href="#G"><strong>G</strong></a>
+ | <a href="#H"><strong>H</strong></a>
+ | <a href="#I"><strong>I</strong></a>
+ | <a href="#L"><strong>L</strong></a>
+ | <a href="#M"><strong>M</strong></a>
+ | <a href="#N"><strong>N</strong></a>
+ | <a href="#P"><strong>P</strong></a>
+ | <a href="#Q"><strong>Q</strong></a>
+ | <a href="#R"><strong>R</strong></a>
+ | <a href="#S"><strong>S</strong></a>
+ | <a href="#T"><strong>T</strong></a>
+ | <a href="#U"><strong>U</strong></a>
+ | <a href="#W"><strong>W</strong></a>
+ | <a href="#X"><strong>X</strong></a>
+ | <a href="#Y"><strong>Y</strong></a>
+ | <a href="#Z"><strong>Z</strong></a>
+ 
+</div>
+<h2 id="A">A</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="hdrCore.html#hdrCore.image.channel.a">a (hdrCore.image.channel attribute)</a>
+</li>
+      <li><a href="hdrCore.html#hdrCore.processing.ProcessPipe.append">append() (hdrCore.processing.ProcessPipe method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="hdrCore.html#hdrCore.image.imageType.ARW">ARW (hdrCore.image.imageType attribute)</a>
+</li>
+      <li><a href="hdrCore.html#hdrCore.processing.exposure.auto">auto() (hdrCore.processing.exposure method)</a>
+</li>
+      <li><a href="hdrCore.html#hdrCore.processing.ProcessPipe.autoResize">autoResize (hdrCore.processing.ProcessPipe attribute)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="B">B</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="hdrCore.html#hdrCore.image.channel.b">b (hdrCore.image.channel attribute)</a>
+</li>
+      <li><a href="hdrCore.html#hdrCore.image.ColorSpace.build">build() (hdrCore.image.ColorSpace static method)</a>
+
+      <ul>
+        <li><a href="hdrCore.html#hdrCore.image.Histogram.build">(hdrCore.image.Histogram static method)</a>
+</li>
+        <li><a href="hdrCore.html#hdrCore.metadata.metadata.build">(hdrCore.metadata.metadata static method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="hdrCore.html#hdrCore.image.Image.buildHistogram">buildHistogram() (hdrCore.image.Image method)</a>
+</li>
+      <li><a href="hdrCore.html#hdrCore.image.Image.buildLchColorData">buildLchColorData() (hdrCore.image.Image static method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="C">C</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="hdrCore.html#hdrCore.image.channel">channel (class in hdrCore.image)</a>
+</li>
+      <li><a href="hdrCore.html#hdrCore.processing.clip">clip (class in hdrCore.processing)</a>
+</li>
+      <li><a href="hdrCore.html#hdrCore.processing.colorEditor">colorEditor (class in hdrCore.processing)</a>
+</li>
+      <li><a href="hdrCore.html#hdrCore.image.ColorSpace">ColorSpace (class in hdrCore.image)</a>
+</li>
+      <li><a href="hdrCore.html#hdrCore.image.channel.colorSpace">colorSpace() (hdrCore.image.channel method)</a>
+</li>
+      <li><a href="hdrCore.html#hdrCore.processing.ColorSpaceTransform">ColorSpaceTransform (class in hdrCore.processing)</a>
+</li>
+      <li><a href="hdrCore.html#hdrCore.processing.clip.compute">compute() (hdrCore.processing.clip method)</a>
+
+      <ul>
+        <li><a href="hdrCore.html#hdrCore.processing.colorEditor.compute">(hdrCore.processing.colorEditor method)</a>
+</li>
+        <li><a href="hdrCore.html#hdrCore.processing.ColorSpaceTransform.compute">(hdrCore.processing.ColorSpaceTransform method)</a>
+</li>
+        <li><a href="hdrCore.html#hdrCore.processing.contrast.compute">(hdrCore.processing.contrast method)</a>
+</li>
+        <li><a href="hdrCore.html#hdrCore.processing.exposure.compute">(hdrCore.processing.exposure method)</a>
+</li>
+        <li><a href="hdrCore.html#hdrCore.processing.geometry.compute">(hdrCore.processing.geometry method)</a>
+</li>
+        <li><a href="hdrCore.html#hdrCore.processing.lightnessMask.compute">(hdrCore.processing.lightnessMask method)</a>
+</li>
+        <li><a href="hdrCore.html#hdrCore.processing.Processing.compute">(hdrCore.processing.Processing method)</a>
+</li>
+        <li><a href="hdrCore.html#hdrCore.processing.ProcessPipe.compute">(hdrCore.processing.ProcessPipe method)</a>
+</li>
+        <li><a href="hdrCore.html#hdrCore.processing.ProcessPipe.ProcessNode.compute">(hdrCore.processing.ProcessPipe.ProcessNode method)</a>
+</li>
+        <li><a href="hdrCore.html#hdrCore.processing.resize.compute">(hdrCore.processing.resize method)</a>
+</li>
+        <li><a href="hdrCore.html#hdrCore.processing.saturation.compute">(hdrCore.processing.saturation method)</a>
+</li>
+        <li><a href="hdrCore.html#hdrCore.processing.tmo_cctf.compute">(hdrCore.processing.tmo_cctf method)</a>
+</li>
+        <li><a href="hdrCore.html#hdrCore.processing.Ycurve.compute">(hdrCore.processing.Ycurve method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="hdrCore.html#hdrCore.processing.ProcessPipe.ProcessNode.condCompute">condCompute() (hdrCore.processing.ProcessPipe.ProcessNode method)</a>
+</li>
+      <li><a href="hdrCore.html#hdrCore.processing.contrast">contrast (class in hdrCore.processing)</a>
+</li>
+      <li><a href="hdrCore.html#hdrCore.utils.croppRotated">croppRotated() (in module hdrCore.utils)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="D">D</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="hdrCore.html#hdrCore.metadata.metadata.defaultColorSpaceName">defaultColorSpaceName (hdrCore.metadata.metadata attribute)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="E">E</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="hdrCore.html#hdrCore.processing.ProcessPipe.export">export() (hdrCore.processing.ProcessPipe method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="hdrCore.html#hdrCore.processing.exposure">exposure (class in hdrCore.processing)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="F">F</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="hdrCore.html#hdrCore.utils.filenamesplit">filenamesplit() (in module hdrCore.utils)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="hdrCore.html#hdrCore.utils.filterlistdir">filterlistdir() (in module hdrCore.utils)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="G">G</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="hdrCore.html#hdrCore.processing.geometry">geometry (class in hdrCore.processing)</a>
+</li>
+      <li><a href="hdrCore.html#hdrCore.image.Image.getChannel">getChannel() (hdrCore.image.Image method)</a>
+</li>
+      <li><a href="hdrCore.html#hdrCore.image.Image.getDynamicRange">getDynamicRange() (hdrCore.image.Image method)</a>
+</li>
+      <li><a href="hdrCore.html#hdrCore.processing.ProcessPipe.getImage">getImage() (hdrCore.processing.ProcessPipe method)</a>
+</li>
+      <li><a href="hdrCore.html#hdrCore.processing.ProcessPipe.getInputImage">getInputImage() (hdrCore.processing.ProcessPipe method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="hdrCore.html#hdrCore.processing.ProcessPipe.getName">getName() (hdrCore.processing.ProcessPipe method)</a>
+</li>
+      <li><a href="hdrCore.html#hdrCore.processing.ProcessPipe.getParameters">getParameters() (hdrCore.processing.ProcessPipe method)</a>
+
+      <ul>
+        <li><a href="hdrCore.html#hdrCore.processing.ProcessPipe.ProcessNode.getParameters">(hdrCore.processing.ProcessPipe.ProcessNode method)</a>
+</li>
+      </ul></li>
+      <li><a href="hdrCore.html#hdrCore.processing.ProcessPipe.getProcessNodeByName">getProcessNodeByName() (hdrCore.processing.ProcessPipe method)</a>
+</li>
+      <li><a href="hdrCore.html#hdrCore.image.channel.getValue">getValue() (hdrCore.image.channel method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="H">H</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="hdrCore.html#hdrCore.image.imageType.HDR">HDR (hdrCore.image.imageType attribute)</a>
+</li>
+      <li>
+    hdrCore
+
+      <ul>
+        <li><a href="hdrCore.html#module-hdrCore">module</a>
+</li>
+      </ul></li>
+      <li>
+    hdrCore.image
+
+      <ul>
+        <li><a href="hdrCore.html#module-hdrCore.image">module</a>
+</li>
+      </ul></li>
+      <li>
+    hdrCore.metadata
+
+      <ul>
+        <li><a href="hdrCore.html#module-hdrCore.metadata">module</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li>
+    hdrCore.processing
+
+      <ul>
+        <li><a href="hdrCore.html#module-hdrCore.processing">module</a>
+</li>
+      </ul></li>
+      <li>
+    hdrCore.quality
+
+      <ul>
+        <li><a href="hdrCore.html#module-hdrCore.quality">module</a>
+</li>
+      </ul></li>
+      <li>
+    hdrCore.utils
+
+      <ul>
+        <li><a href="hdrCore.html#module-hdrCore.utils">module</a>
+</li>
+      </ul></li>
+      <li><a href="hdrCore.html#hdrCore.image.Histogram">Histogram (class in hdrCore.image)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="I">I</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="hdrCore.html#hdrCore.processing.ProcessPipe.ProcessNode.id">id (hdrCore.processing.ProcessPipe.ProcessNode attribute)</a>
+</li>
+      <li><a href="hdrCore.html#hdrCore.image.Image">Image (class in hdrCore.image)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="hdrCore.html#hdrCore.image.imageType">imageType (class in hdrCore.image)</a>
+</li>
+      <li><a href="hdrCore.html#hdrCore.image.Image.isHDR">isHDR() (hdrCore.image.Image method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="L">L</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="hdrCore.html#hdrCore.image.channel.L">L (hdrCore.image.channel attribute)</a>
+</li>
+      <li><a href="hdrCore.html#hdrCore.image.channel.Lab">Lab (hdrCore.image.channel attribute)</a>
+</li>
+      <li><a href="hdrCore.html#hdrCore.image.ColorSpace.Lab">Lab() (hdrCore.image.ColorSpace static method)</a>
+</li>
+      <li><a href="hdrCore.html#hdrCore.processing.Lab_to_sRGB">Lab_to_sRGB() (in module hdrCore.processing)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="hdrCore.html#hdrCore.processing.Lab_to_XYZ">Lab_to_XYZ() (in module hdrCore.processing)</a>
+</li>
+      <li><a href="hdrCore.html#hdrCore.image.ColorSpace.Lch">Lch() (hdrCore.image.ColorSpace static method)</a>
+</li>
+      <li><a href="hdrCore.html#hdrCore.processing.Lch_to_sRGB">Lch_to_sRGB() (in module hdrCore.processing)</a>
+</li>
+      <li><a href="hdrCore.html#hdrCore.processing.lightnessMask">lightnessMask (class in hdrCore.processing)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="M">M</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="hdrCore.html#hdrCore.processing.ProcessPipe.maxSize">maxSize (hdrCore.processing.ProcessPipe attribute)</a>
+</li>
+      <li><a href="hdrCore.html#hdrCore.processing.ProcessPipe.maxWorking">maxWorking (hdrCore.processing.ProcessPipe attribute)</a>
+</li>
+      <li><a href="hdrCore.html#hdrCore.image.Image.merge">merge() (hdrCore.image.Image static method)</a>
+</li>
+      <li><a href="hdrCore.html#hdrCore.metadata.metadata">metadata (class in hdrCore.metadata)</a>
+</li>
+      <li>
+    module
+
+      <ul>
+        <li><a href="hdrCore.html#module-hdrCore">hdrCore</a>
+</li>
+        <li><a href="hdrCore.html#module-hdrCore.image">hdrCore.image</a>
+</li>
+        <li><a href="hdrCore.html#module-hdrCore.metadata">hdrCore.metadata</a>
+</li>
+        <li><a href="hdrCore.html#module-hdrCore.processing">hdrCore.processing</a>
+</li>
+        <li><a href="hdrCore.html#module-hdrCore.quality">hdrCore.quality</a>
+</li>
+        <li><a href="hdrCore.html#module-hdrCore.utils">hdrCore.utils</a>
+</li>
+        <li><a href="uHDR.html#module-uHDR">uHDR</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="N">N</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="hdrCore.html#hdrCore.utils.ndarray2vector">ndarray2vector() (in module hdrCore.utils)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="hdrCore.html#hdrCore.image.Histogram.normalise">normalise() (hdrCore.image.Histogram method)</a>
+</li>
+      <li><a href="hdrCore.html#hdrCore.utils.NPlinearWeightMask">NPlinearWeightMask() (in module hdrCore.utils)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="P">P</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="hdrCore.html#hdrCore.image.Histogram.plot">plot() (hdrCore.image.Histogram method)</a>
+
+      <ul>
+        <li><a href="hdrCore.html#hdrCore.image.Image.plot">(hdrCore.image.Image method)</a>
+</li>
+      </ul></li>
+      <li><a href="hdrCore.html#hdrCore.image.Image.process">process() (hdrCore.image.Image method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="hdrCore.html#hdrCore.processing.Processing">Processing (class in hdrCore.processing)</a>
+</li>
+      <li><a href="hdrCore.html#hdrCore.processing.ProcessPipe">ProcessPipe (class in hdrCore.processing)</a>
+</li>
+      <li><a href="hdrCore.html#hdrCore.processing.ProcessPipe.ProcessNode">ProcessPipe.ProcessNode (class in hdrCore.processing)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="Q">Q</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="hdrCore.html#hdrCore.quality.quality">quality (class in hdrCore.quality)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="R">R</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="hdrCore.html#hdrCore.image.Image.read">read() (hdrCore.image.Image static method)</a>
+</li>
+      <li><a href="hdrCore.html#hdrCore.metadata.metadata.readExif">readExif() (hdrCore.metadata.metadata static method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="hdrCore.html#hdrCore.metadata.metadata.recoverData">recoverData() (hdrCore.metadata.metadata method)</a>
+</li>
+      <li><a href="hdrCore.html#hdrCore.processing.resize">resize (class in hdrCore.processing)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="S">S</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="hdrCore.html#hdrCore.processing.saturation">saturation (class in hdrCore.processing)</a>
+</li>
+      <li><a href="hdrCore.html#hdrCore.metadata.metadata.save">save() (hdrCore.metadata.metadata method)</a>
+</li>
+      <li><a href="hdrCore.html#hdrCore.image.channel.sB">sB (hdrCore.image.channel attribute)</a>
+</li>
+      <li><a href="hdrCore.html#hdrCore.image.ColorSpace.scRGB">scRGB() (hdrCore.image.ColorSpace static method)</a>
+</li>
+      <li><a href="hdrCore.html#hdrCore.image.imageType.SDR">SDR (hdrCore.image.imageType attribute)</a>
+</li>
+      <li><a href="hdrCore.html#hdrCore.processing.ProcessPipe.setImage">setImage() (hdrCore.processing.ProcessPipe method)</a>
+</li>
+      <li><a href="hdrCore.html#hdrCore.processing.ProcessPipe.setParameters">setParameters() (hdrCore.processing.ProcessPipe method)</a>
+
+      <ul>
+        <li><a href="hdrCore.html#hdrCore.processing.ProcessPipe.ProcessNode.setParameters">(hdrCore.processing.ProcessPipe.ProcessNode method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="hdrCore.html#hdrCore.image.channel.sG">sG (hdrCore.image.channel attribute)</a>
+</li>
+      <li><a href="hdrCore.html#hdrCore.image.Image.split">split() (hdrCore.image.Image method)</a>
+</li>
+      <li><a href="hdrCore.html#hdrCore.image.channel.sR">sR (hdrCore.image.channel attribute)</a>
+</li>
+      <li><a href="hdrCore.html#hdrCore.image.channel.sRGB">sRGB (hdrCore.image.channel attribute)</a>
+</li>
+      <li><a href="hdrCore.html#hdrCore.image.ColorSpace.sRGB">sRGB() (hdrCore.image.ColorSpace static method)</a>
+</li>
+      <li><a href="hdrCore.html#hdrCore.processing.sRGB_to_Lab">sRGB_to_Lab() (in module hdrCore.processing)</a>
+</li>
+      <li><a href="hdrCore.html#hdrCore.processing.sRGB_to_XYZ">sRGB_to_XYZ() (in module hdrCore.processing)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="T">T</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="hdrCore.html#hdrCore.processing.tmo_cctf">tmo_cctf (class in hdrCore.processing)</a>
+</li>
+      <li><a href="hdrCore.html#hdrCore.image.channel.toChannel">toChannel() (hdrCore.image.channel static method)</a>
+</li>
+      <li><a href="hdrCore.html#hdrCore.processing.ProcessPipe.toDict">toDict() (hdrCore.processing.ProcessPipe method)</a>
+
+      <ul>
+        <li><a href="hdrCore.html#hdrCore.processing.ProcessPipe.ProcessNode.toDict">(hdrCore.processing.ProcessPipe.ProcessNode method)</a>
+</li>
+        <li><a href="hdrCore.html#hdrCore.quality.quality.toDict">(hdrCore.quality.quality method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="hdrCore.html#hdrCore.image.Histogram.toNumpy">toNumpy() (hdrCore.image.Histogram method)</a>
+</li>
+      <li><a href="hdrCore.html#hdrCore.image.Image.toOne">toOne() (hdrCore.image.Image static method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="U">U</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li>
+    uHDR
+
+      <ul>
+        <li><a href="uHDR.html#module-uHDR">module</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="hdrCore.html#hdrCore.processing.ProcessPipe.updateHDRuseCase">updateHDRuseCase() (hdrCore.processing.ProcessPipe method)</a>
+</li>
+      <li><a href="hdrCore.html#hdrCore.processing.ProcessPipe.updateProcessPipeMetadata">updateProcessPipeMetadata() (hdrCore.processing.ProcessPipe method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="W">W</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="hdrCore.html#hdrCore.image.Image.write">write() (hdrCore.image.Image method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="X">X</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="hdrCore.html#hdrCore.image.channel.X">X (hdrCore.image.channel attribute)</a>
+</li>
+      <li><a href="hdrCore.html#hdrCore.image.channel.XYZ">XYZ (hdrCore.image.channel attribute)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="hdrCore.html#hdrCore.image.ColorSpace.XYZ">XYZ() (hdrCore.image.ColorSpace static method)</a>
+</li>
+      <li><a href="hdrCore.html#hdrCore.processing.XYZ_to_Lab">XYZ_to_Lab() (in module hdrCore.processing)</a>
+</li>
+      <li><a href="hdrCore.html#hdrCore.processing.XYZ_to_sRGB">XYZ_to_sRGB() (in module hdrCore.processing)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="Y">Y</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="hdrCore.html#hdrCore.image.channel.Y">Y (hdrCore.image.channel attribute)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="hdrCore.html#hdrCore.processing.Ycurve">Ycurve (class in hdrCore.processing)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="Z">Z</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="hdrCore.html#hdrCore.image.channel.Z">Z (hdrCore.image.channel attribute)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+
+
+             </article>
+             
+            </div>
+            <footer>
+  
+
+  
+
+    <hr>
+
+  
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2021, Rémi Cozot.
+
+    </p>
+  </div>
+    
+      <div>
+        Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+      </div>
+     
+
+</footer>
+
+          </div>
+        </div>
+
+        <div class="pytorch-content-right" id="pytorch-content-right">
+          <div class="pytorch-right-menu" id="pytorch-right-menu">
+            <div class="pytorch-side-scroll" id="pytorch-side-scroll-right">
+              
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+  
+
+
+  
+
+     
+       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+         <script src="_static/jquery.js"></script>
+         <script src="_static/underscore.js"></script>
+         <script src="_static/doctools.js"></script>
+     
+
+  
+
+  <script type="text/javascript" src="_static/js/vendor/popper.min.js"></script>
+  <script type="text/javascript" src="_static/js/vendor/bootstrap.min.js"></script>
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+  <!-- Begin Footer -->
+
+  <div class="container-fluid" id="docs-tutorials-resources">
+    <div class="container">
+      <div class="row">
+        <!--
+        <div class="col-md-4 text-center">
+          <h2>Docs</h2>
+          <p>Access comprehensive developer documentation for PyTorch</p>
+          <a class="with-right-arrow" href="https://pytorch.org/docs/stable/index.html">View Docs</a>
+        </div>
+
+        <div class="col-md-4 text-center">
+          <h2>Tutorials</h2>
+          <p>Get in-depth tutorials for beginners and advanced developers</p>
+          <a class="with-right-arrow" href="https://pytorch.org/tutorials">View Tutorials</a>
+        </div>
+
+        <div class="col-md-4 text-center">
+          <h2>Resources</h2>
+          <p>Find development resources and get your questions answered</p>
+          <a class="with-right-arrow" href="https://pytorch.org/resources">View Resources</a>
+        </div>
+        -->
+      </div>
+    </div>
+  </div>
+
+
+  <!-- <footer class="site-footer">
+    <div class="container footer-container">
+      <div class="footer-logo-wrapper">
+        <a href="https://github.com/mpariente/asteroid" class="footer-logo"></a>
+      </div>
+
+      <div class="footer-links-wrapper">
+
+        <div class="footer-logo-col">
+          <img class="footer-logo-img" src="_static/images/dark_asteroid_logo.svg"/>
+        </div>
+
+        <div class="footer-links-col">
+          <ul>
+            <li class="list-title"><a href="https://github.com/mpariente/asteroid">Asteroid</a></li>
+            <li><a href="https://pytorch.org/get-started">Get Started</a></li>
+            <li><a href="https://pytorch.org/features">Features</a></li>
+            <li><a href="">Ecosystem</a></li>
+            <li><a href="https://pytorch.org/blog/">Blog</a></li>
+            <li><a href="https://pytorch.org/resources">Resources</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links-col">
+          <ul>
+            <li class="list-title"><a href="https://pytorch.org/support">Support</a></li>
+            <li><a href="https://pytorch.org/tutorials">Tutorials</a></li>
+            <li><a href="https://pytorch.org/docs/stable/index.html">Docs</a></li>
+            <li><a href="https://discuss.pytorch.org" target="_blank">Discuss</a></li>
+            <li><a href="https://github.com/mpariente/asteroid/issues" target="_blank">Github Issues</a></li>
+            <li><a href="" target="_blank">Slack</a></li>
+            <li><a href="https://github.com/mpariente/asteroid/blob/master/CONTRIBUTING.md" target="_blank">Contributing</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links-col follow-us-col">
+          <ul>
+            <li class="list-title">Follow Us</li>
+            <li>
+              <div id="mc_embed_signup">
+                <form
+                  action="https://twitter.us14.list-manage.com/subscribe/post?u=75419c71fe0a935e53dfa4a3f&id=91d0dccd39"
+                  method="post"
+                  id="mc-embedded-subscribe-form"
+                  name="mc-embedded-subscribe-form"
+                  class="email-subscribe-form validate"
+                  target="_blank"
+                  novalidate>
+                  <div id="mc_embed_signup_scroll" class="email-subscribe-form-fields-wrapper">
+                    <div class="mc-field-group">
+                      <label for="mce-EMAIL" style="display:none;">Email Address</label>
+                      <input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL" placeholder="Email Address">
+                    </div>
+
+                    <div id="mce-responses" class="clear">
+                      <div class="response" id="mce-error-response" style="display:none"></div>
+                      <div class="response" id="mce-success-response" style="display:none"></div>
+                    </div>
+
+                    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_75419c71fe0a935e53dfa4a3f_91d0dccd39" tabindex="-1" value=""></div>
+
+                    <div class="clear">
+                      <input type="submit" value="" name="subscribe" id="mc-embedded-subscribe" class="button email-subscribe-button">
+                    </div>
+                  </div>
+                </form>
+              </div>
+
+            </li>
+          </ul>
+
+          <div class="footer-social-icons">
+            <a href="" target="_blank" class="facebook"></a>
+            <a href="https://twitter.com" target="_blank" class="twitter"></a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </footer> -->
+
+
+  <!-- End Footer -->
+
+  <!-- Begin Mobile Menu -->
+
+  <div class="mobile-main-menu">
+    <div class="container-fluid">
+      <div class="container">
+        <div class="mobile-main-menu-header-container">
+          <a class="header-logo" href="https://github.com/mpariente/asteroid" aria-label="PyTorch Lightning"></a>
+          <a class="main-menu-close-button" href="#" data-behavior="close-mobile-menu"></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="mobile-main-menu-links-container">
+      <div class="main-menu">
+        <ul>
+          <li>
+            <a href="https://pytorch.org/get-started">Get Started</a>
+          </li>
+
+          <li>
+            <a href="https://pytorch.org/features">Features</a>
+          </li>
+
+          <li>
+            <a href="https://pytorch.org/blog/">Blog</a>
+          </li>
+
+          <li>
+            <a href="https://pytorch.org/tutorials">Tutorials</a>
+          </li>
+
+          <li>
+            <a href="https://pytorch.org/docs/stable/index.html">Docs</a>
+          </li>
+
+          <li>
+            <a href="https://pytorch.org/resources">Resources</a>
+          </li>
+
+          <li>
+            <a href="https://github.com/mpariente/asteroid">Github</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- End Mobile Menu -->
+
+  <script type="text/javascript" src="_static/js/vendor/anchor.min.js"></script>
+
+  <script type="text/javascript">
+    $(document).ready(function() {
+      mobileMenu.bind();
+      mobileTOC.bind();
+      pytorchAnchors.bind();
+      sideMenus.bind();
+      scrollToAnchor.bind();
+      highlightNavigation.bind();
+      mainMenuDropdown.bind();
+
+      // Add class to links that have code blocks, since we cannot create links in code blocks
+      $("article.pytorch-article a span.pre").each(function(e) {
+        $(this).closest("a").addClass("has-code");
+      });
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,2221 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>hdrCore package &mdash; uHDR 0.9 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!-- <link rel="stylesheet" href="_static/pygments.css" type="text/css" /> -->
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="uHDR module" href="uHDR.html" />
+    <link rel="prev" title="uHDR_documente" href="modules.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+  <!-- Preload the theme fonts -->
+
+<link rel="preload" href="_static/fonts/FreightSans/freight-sans-book.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="_static/fonts/FreightSans/freight-sans-medium.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="_static/fonts/IBMPlexMono/IBMPlexMono-Medium.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="_static/fonts/FreightSans/freight-sans-bold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="_static/fonts/FreightSans/freight-sans-medium-italic.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="_static/fonts/IBMPlexMono/IBMPlexMono-SemiBold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+
+<!-- Preload the katex fonts -->
+
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Math-Italic.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Main-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Main-Bold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size1-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size4-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size2-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size3-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Caligraphic-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+</head>
+
+<div class="container-fluid header-holder tutorials-header" id="header-holder">
+  <div class="container">
+    <div class="header-container">
+      <a class="header-logo" href="https://github.com/mpariente/asteroid" aria-label="PyTorch">
+       <!-- <img class="call-to-action-img" src="_static/images/asteroid_logo_dark.png"/> -->
+      </a>
+
+      <div class="main-menu">
+        <ul>
+          <li>
+            <a href="https://pytorch.org/get-started">Get Started</a>
+          </li>
+
+          <li>
+            <a href="https://pytorch.org/blog/">Blog</a>
+          </li>
+
+          <li>
+            <a href="https://pytorch.org/tutorials">Tutorials</a>
+          </li>
+
+          <li>
+            <a href="https://pytorch.org/docs/stable/index.html">Docs</a>
+          </li>
+
+          <li>
+            <div class="resources-dropdown">
+              <a id="resourcesDropdownButton" data-toggle="resources-dropdown">
+                Resources
+              </a>
+              <div class="resources-dropdown-menu">
+                <a class="nav-dropdown-item" href="https://pytorch.org/resources"">
+                  <span class=dropdown-title>Developer Resources</span>
+                  <p>Find resources and get questions answered</p>
+                </a>
+                <!--
+                <a class="nav-dropdown-item" href="https://pytorch.org/features">
+                  <span class=dropdown-title>About</span>
+                  <p>Learn about PyTorch’s features and capabilities</p>
+                </a>
+                -->
+              </div>
+            </div>
+          </li>
+
+          <li>
+            <a href="https://github.com/mpariente/asteroid">Github</a>
+          </li>
+        </ul>
+      </div>
+
+      <a class="main-menu-open-button" href="#" data-behavior="open-mobile-menu"></a>
+    </div>
+
+  </div>
+</div>
+
+
+<body class="pytorch-body">
+
+   
+
+    
+
+    <div class="table-of-contents-link-wrapper">
+      <span>Table of Contents</span>
+      <a href="#" class="toggle-table-of-contents" data-behavior="toggle-table-of-contents"></a>
+    </div>
+
+    <nav data-toggle="wy-nav-shift" class="pytorch-left-menu" id="pytorch-left-menu">
+      <div class="pytorch-side-scroll">
+        <div class="pytorch-menu pytorch-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          <div class="pytorch-left-menu-search">
+            
+
+            
+              
+              
+            
+
+            
+
+
+  
+
+
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search Docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+            
+          </div>
+
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">uHDR_documente</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <div class="pytorch-container">
+      <div class="pytorch-page-level-bar" id="pytorch-page-level-bar">
+        <div class="pytorch-breadcrumbs-wrapper">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="pytorch-breadcrumbs">
+    
+      <li>
+        <a href="index.html">
+          
+            Docs
+          
+        </a> &gt;
+      </li>
+
+        
+          <li><a href="modules.html">uHDR_documente</a> &gt;</li>
+        
+      <li>hdrCore package</li>
+    
+    
+      <li class="pytorch-breadcrumbs-aside">
+        
+            
+            <a href="_sources/hdrCore.rst.txt" rel="nofollow"><img src="_static/images/view-page-source-icon.svg"></a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+</div>
+        </div>
+
+        <div class="pytorch-shortcuts-wrapper" id="pytorch-shortcuts-wrapper">
+          Shortcuts
+        </div>
+      </div>
+
+      <section data-toggle="wy-nav-shift" id="pytorch-content-wrap" class="pytorch-content-wrap">
+        <div class="pytorch-content-left">
+
+        
+          
+          <div class="rst-content">
+          
+            <div role="main" class="main-content" itemscope="itemscope" itemtype="http://schema.org/Article">
+             <article itemprop="articleBody" id="pytorch-article" class="pytorch-article">
+              
+  <section id="hdrcore-package">
+<h1>hdrCore package<a class="headerlink" href="#hdrcore-package" title="Permalink to this headline">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="module-hdrCore.image">
+<span id="hdrcore-image-module"></span><h2>hdrCore.image module<a class="headerlink" href="#module-hdrCore.image" title="Permalink to this headline">¶</a></h2>
+<p>package hdrCoreconsists of the core classes for HDR imaging:
+(1) classes:    class imageType</p>
+<blockquote>
+<div><p>class channel
+class Image
+class ColorSpace 
+class Histogram</p>
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li><p>class:      class metadata</p></li>
+<li><dl class="simple">
+<dt>processing functions and classes:</dt><dd><p>def XYZ_to_sRGB(XYZ,apply_cctf_encoding=True):
+def sRGB_to_XYZ(RGB,apply_cctf_decoding=True):  
+def Lab_to_XYZ(Lab)
+def XYZ_to_Lab(XYZ)
+def Lab_to_sRGB(Lab, apply_cctf_encoding=True, clip = False)
+def sRGB_to_Lab(RGB, apply_cctf_decoding=True)
+def Lch_to_sRGB(Lch,apply_cctf_encoding=True, clip=False)   
+class Processing(object)
+class tmo_cctf(Processing)
+class exposure(Processing)
+class contrast(Processing)
+class clip(Processing)
+class ColorSpaceTransform(Processing)
+class resize(Processing)
+class Ycurve(Processing)
+class saturation(Processing)
+class lightnessMask(Processing)
+class geometry(Processing)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>processing nodes that encapsulate processing objects in process-pipe: </dt><dd><p>class ProcessNode(object)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>process-pipe that defines the pipeline of processing:</dt><dd><p>class ProcessPipe(object)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>some utils functions:</dt><dd><p>def filenamesplit(filename)
+def filterlistdir(path,extList)
+def ndarray2vector(nda)
+def NPlinearWeightMask(x,xMin,xMax,xTolerance)
+def croppRotated(h,w,alpha)</p>
+</dd>
+</dl>
+</li>
+<li><p>HDRdisplay model</p></li>
+</ol>
+<dl class="py class">
+<dt class="sig sig-object py" id="hdrCore.image.ColorSpace">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">hdrCore.image.</span></span><span class="sig-name descname"><span class="pre">ColorSpace</span></span><a class="headerlink" href="#hdrCore.image.ColorSpace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Mapping to colour.models.RGB_COLOURSPACES</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="hdrCore.image.ColorSpace.Lab">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">Lab</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hdrCore.image.ColorSpace.Lab" title="Permalink to this definition">¶</a></dt>
+<dd><p>TODO - Documentation de la méthode Lab</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hdrCore.image.ColorSpace.Lch">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">Lch</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hdrCore.image.ColorSpace.Lch" title="Permalink to this definition">¶</a></dt>
+<dd><p>TODO - Documentation de la méthode Lch</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hdrCore.image.ColorSpace.XYZ">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">XYZ</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hdrCore.image.ColorSpace.XYZ" title="Permalink to this definition">¶</a></dt>
+<dd><p>TODO - Documentation de la méthode XYZ</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hdrCore.image.ColorSpace.build">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">build</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'sRGB'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hdrCore.image.ColorSpace.build" title="Permalink to this definition">¶</a></dt>
+<dd><p>TODO - Documentation de la méthode build</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>name=’sRGB’: str</dt><dd><p>TODO</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hdrCore.image.ColorSpace.sRGB">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">sRGB</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hdrCore.image.ColorSpace.sRGB" title="Permalink to this definition">¶</a></dt>
+<dd><p>TODO - Documentation de la méthode sRGB</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hdrCore.image.ColorSpace.scRGB">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">scRGB</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hdrCore.image.ColorSpace.scRGB" title="Permalink to this definition">¶</a></dt>
+<dd><p>TODO - Documentation de la méthode scRGB</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="hdrCore.image.Histogram">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">hdrCore.image.</span></span><span class="sig-name descname"><span class="pre">Histogram</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">histValue</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edgeValue</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logSpace</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hdrCore.image.Histogram" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>TODO - documentation de la classe image.Histogram</p>
+<p>description of class</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><dl class="simple">
+<dt>name: str</dt><dd><p>TODO</p>
+</dd>
+<dt>channel: TODO</dt><dd><p>TODO</p>
+</dd>
+<dt>histValue: TODO</dt><dd><p>TODO</p>
+</dd>
+<dt>edgeValue: TODO</dt><dd><p>TODO</p>
+</dd>
+<dt>logSpace: TODO</dt><dd><p>TODO</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="hdrCore.image.Histogram.build">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">build</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nbBins</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">range</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logSpace</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hdrCore.image.Histogram.build" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build an Histogram object from image.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>img: Image</dt><dd><p>Required : input image from witch hsitogram will be build</p>
+</dd>
+<dt>channel: channel</dt><dd><p>Required : image channel used to build histogram</p>
+</dd>
+<dt>nbBins: int</dt><dd><p>Optional : histogram number of bins</p>
+</dd>
+<dt>range: (Float,Float)</dt><dd><p>Optional : range of histogram, if None min max of channel</p>
+</dd>
+<dt>logSpace: boolean</dt><dd><p>Optional : compute in log space if True, if None guess from image</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>Histogram</dt><dd><p>Histogram of the image.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hdrCore.image.Histogram.normalise">
+<span class="sig-name descname"><span class="pre">normalise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">norm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hdrCore.image.Histogram.normalise" title="Permalink to this definition">¶</a></dt>
+<dd><p>Normalise histogram according to norm=’probability’ | ‘dot’</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>norm: str</dt><dd><p>Norm of the normalization</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>TODO</dt><dd><p>TODO</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hdrCore.image.Histogram.plot">
+<span class="sig-name descname"><span class="pre">plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'r'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shortName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hdrCore.image.Histogram.plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to plot the histogram</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>ax: TODO</dt><dd><p>TODO</p>
+</dd>
+<dt>color: TODO</dt><dd><p>TODO</p>
+</dd>
+<dt>shortName: boolean</dt><dd><p>TODO</p>
+</dd>
+<dt>title: boolean</dt><dd><p>TODO</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hdrCore.image.Histogram.toNumpy">
+<span class="sig-name descname"><span class="pre">toNumpy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hdrCore.image.Histogram.toNumpy" title="Permalink to this definition">¶</a></dt>
+<dd><p>TODO - Documentation de la méthode toNumpy</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>TODO</dt><dd><p>TODO</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="hdrCore.image.Image">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">hdrCore.image.</span></span><span class="sig-name descname"><span class="pre">Image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colorData</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">linear</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colorspace</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scalingFactor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hdrCore.image.Image" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>class hdrCore.image.Image: the basic class that models HDR image and associated data</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><p>path (str):                 path to access image
+name (str):                 image filename
+colorData (numpy.ndarray):  numpy array of pixels
+type (image.imageType):     type of image
+linear (boolean):           image encoding is linear
+colorSpace (colour.models.RGB_COLOURSPACES): colorspace
+scalingFactor (float):      scaling factor to range[0..1]
+metadata (hdrCore.metadatametadata): metadata
+histogram(hdrCore.image.Histogram): image histogram</p>
+</dd>
+<dt>Methods:</dt><dd><p>isHDR:                      (boolean) returns True if image is HDR
+process:                    (hdrCore.image.Image) computes a processing and returns a new Image 
+write:                      () write image and json metadata on disk (HDR image only)
+getChannel:                 ()
+getDynamicRange:
+buildHistogram:
+plot:
+__repr__:                   (str)
+split:                      (list[[hdrCore.image.Image]]) split an image into sub-images</p>
+</dd>
+<dt>Static methods:</dt><dd><p>read:                        (hdrCore.image.Image) read an image from file
+toOne:                       /!not used in uHDR
+buildLchColorData:</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="hdrCore.image.Image.buildHistogram">
+<span class="sig-name descname"><span class="pre">buildHistogram</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">channel</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hdrCore.image.Image.buildHistogram" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build the histogram of the image</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>channel: TODO</dt><dd><p>TODO</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hdrCore.image.Image.buildLchColorData">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">buildLchColorData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">L</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">h</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hdrCore.image.Image.buildLchColorData" title="Permalink to this definition">¶</a></dt>
+<dd><p>TODO - Documentation de la méthode buildLchColorData</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>L: TODO</dt><dd><p>TODO</p>
+</dd>
+<dt>c: TODO</dt><dd><p>TODO</p>
+</dd>
+<dt>h: TODO</dt><dd><p>TODO</p>
+</dd>
+<dt>size: TODO</dt><dd><p>TODO</p>
+</dd>
+<dt>width: TODO</dt><dd><p>TODO</p>
+</dd>
+<dt>height: TODO</dt><dd><p>TODO</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>TODO</dt><dd><p>TODO</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hdrCore.image.Image.getChannel">
+<span class="sig-name descname"><span class="pre">getChannel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">channel</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hdrCore.image.Image.getChannel" title="Permalink to this definition">¶</a></dt>
+<dd><p>To get channel : works only for sR|sG|sB, X|Y|Z and L|a|b</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>channel: TODO</dt><dd><p>TODO</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hdrCore.image.Image.getDynamicRange">
+<span class="sig-name descname"><span class="pre">getDynamicRange</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">percentile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hdrCore.image.Image.getDynamicRange" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve the dynamic range of image</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>percentile: float</dt><dd><p>Optional  : percentile if None: just remove zero values</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>float</dt><dd><p>The dynamic range of the image</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hdrCore.image.Image.isHDR">
+<span class="sig-name descname"><span class="pre">isHDR</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hdrCore.image.Image.isHDR" title="Permalink to this definition">¶</a></dt>
+<dd><p>isHDR: return True is image is HDR</p>
+<p>Args:</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>(boolean)</dt><dd><p>True if the image is an HDR image, False otherwise</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hdrCore.image.Image.merge">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">merge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">imgList</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hdrCore.image.Image.merge" title="Permalink to this definition">¶</a></dt>
+<dd><p>merge: merge 2D list of images into a single image (same size, same characteristics)</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>imgList (list[[hdrCore.image.Image]], Required): 2D list of images</p>
+</dd>
+<dt>Returns:</dt><dd><p>(hdrCore.image.Image)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hdrCore.image.Image.plot">
+<span class="sig-name descname"><span class="pre">plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">displayTitle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">forceToneMapping</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">TMO</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hdrCore.image.Image.plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to plot the image.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>ax: TODO</dt><dd><p>TODO</p>
+</dd>
+<dt>displayTitle: boolean</dt><dd><p>Indicates if the name and colorSpace must be displayed above the image.</p>
+</dd>
+<dt>title: str</dt><dd><p>Title for the image. If None, the title will be the name of the image and its colorspace.</p>
+</dd>
+<dt>forceToneMapping: boolean</dt><dd><p>TODO</p>
+</dd>
+<dt>TMO: TODO</dt><dd><p>TODO</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hdrCore.image.Image.process">
+<span class="sig-name descname"><span class="pre">process</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">process</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hdrCore.image.Image.process" title="Permalink to this definition">¶</a></dt>
+<dd><p>compute a process according to the Processing object parameter.</p>
+<p>process, instance of Processing class, has a compute(image, **kwargs) method</p>
+<dl>
+<dt>Args:</dt><dd><p>process: Processing object (see processing.Processing)</p>
+<dl class="simple">
+<dt>kwargs: optionnal parameters packed as dict</dt><dd><p>parameters of the compute method of the Processing object</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hdrCore.image.Image.read">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">thumb</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hdrCore.image.Image.read" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to read image from its filename. blablabla TODO à compléter.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>filename: str</dt><dd><p>Filename of the file to read.</p>
+</dd>
+<dt>thumb: boolean</dt><dd><p>This flag indicates us if soft have to read the thumbnail or the original file for what the thumbnail will be created.</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>image.Image</dt><dd><p>the image object build from file.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>Example:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">uhdCore</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">filename</span> <span class="o">=</span> <span class="s2">&quot;test.hdr&quot;</span><span class="p">,</span> <span class="n">thumb</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>TODO - Exemple à modifier</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hdrCore.image.Image.split">
+<span class="sig-name descname"><span class="pre">split</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">widthSegment</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">heightSegment</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hdrCore.image.Image.split" title="Permalink to this definition">¶</a></dt>
+<dd><p>split: split an image widthSegment x heightSegment sub-images.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>widthSegment (int, Required): number of horizonatal segments
+heightSegment (int required): number of vertical segments</p>
+</dd>
+<dt>Returns</dt><dd><p>list[[hdrCore.image.Image]] : list of sub-images</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hdrCore.image.Image.toOne">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">toOne</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">colorData</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hdrCore.image.Image.toOne" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method scale the image colorData in [0, 1] space</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>colorData: TODO</dt><dd><p>TODO</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>TODO</dt><dd><p>TODO</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hdrCore.image.Image.write">
+<span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hdrCore.image.Image.write" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to write the image in a file.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>filename: str</dt><dd><p>Filename of the file to read.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="hdrCore.image.channel">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">hdrCore.image.</span></span><span class="sig-name descname"><span class="pre">channel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hdrCore.image.channel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>This class groups constant values and methods relative to a channel of an image together. This class is an easy definition of channel.</p>
+<dl class="simple">
+<dt>Attributes :</dt><dd><dl class="simple">
+<dt>value: int</dt><dd><p>Store the type of channel.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="hdrCore.image.channel.colorSpace">
+<span class="sig-name descname"><span class="pre">colorSpace</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hdrCore.image.channel.colorSpace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve the channel as a string.</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>str</dt><dd><p>Colorspace type of the channel : ‘sRGB’, ‘XYZ’ or ‘Lab’.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hdrCore.image.channel.getValue">
+<span class="sig-name descname"><span class="pre">getValue</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hdrCore.image.channel.getValue" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve the channel index.</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>int</dt><dd><p>Index of the channel.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hdrCore.image.channel.toChannel">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">toChannel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hdrCore.image.channel.toChannel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert a channel name as a constant value defined in this class.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>s: str</dt><dd><p>Name of the desired channel. This argument have to be in the list : ‘sR’, ‘sG’, ‘sB’, ‘X’, ‘Y’, ‘Z’, ‘L’, ‘a’ or ‘b’.</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>int</dt><dd><p>Index of the channel.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hdrCore.image.channel.L">
+<span class="sig-name descname"><span class="pre">L</span></span><em class="property"> <span class="pre">=</span> <span class="pre">8</span></em><a class="headerlink" href="#hdrCore.image.channel.L" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hdrCore.image.channel.Lab">
+<span class="sig-name descname"><span class="pre">Lab</span></span><em class="property"> <span class="pre">=</span> <span class="pre">11</span></em><a class="headerlink" href="#hdrCore.image.channel.Lab" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hdrCore.image.channel.X">
+<span class="sig-name descname"><span class="pre">X</span></span><em class="property"> <span class="pre">=</span> <span class="pre">4</span></em><a class="headerlink" href="#hdrCore.image.channel.X" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hdrCore.image.channel.XYZ">
+<span class="sig-name descname"><span class="pre">XYZ</span></span><em class="property"> <span class="pre">=</span> <span class="pre">7</span></em><a class="headerlink" href="#hdrCore.image.channel.XYZ" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hdrCore.image.channel.Y">
+<span class="sig-name descname"><span class="pre">Y</span></span><em class="property"> <span class="pre">=</span> <span class="pre">5</span></em><a class="headerlink" href="#hdrCore.image.channel.Y" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hdrCore.image.channel.Z">
+<span class="sig-name descname"><span class="pre">Z</span></span><em class="property"> <span class="pre">=</span> <span class="pre">6</span></em><a class="headerlink" href="#hdrCore.image.channel.Z" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hdrCore.image.channel.a">
+<span class="sig-name descname"><span class="pre">a</span></span><em class="property"> <span class="pre">=</span> <span class="pre">9</span></em><a class="headerlink" href="#hdrCore.image.channel.a" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hdrCore.image.channel.b">
+<span class="sig-name descname"><span class="pre">b</span></span><em class="property"> <span class="pre">=</span> <span class="pre">10</span></em><a class="headerlink" href="#hdrCore.image.channel.b" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hdrCore.image.channel.sB">
+<span class="sig-name descname"><span class="pre">sB</span></span><em class="property"> <span class="pre">=</span> <span class="pre">2</span></em><a class="headerlink" href="#hdrCore.image.channel.sB" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hdrCore.image.channel.sG">
+<span class="sig-name descname"><span class="pre">sG</span></span><em class="property"> <span class="pre">=</span> <span class="pre">1</span></em><a class="headerlink" href="#hdrCore.image.channel.sG" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hdrCore.image.channel.sR">
+<span class="sig-name descname"><span class="pre">sR</span></span><em class="property"> <span class="pre">=</span> <span class="pre">0</span></em><a class="headerlink" href="#hdrCore.image.channel.sR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hdrCore.image.channel.sRGB">
+<span class="sig-name descname"><span class="pre">sRGB</span></span><em class="property"> <span class="pre">=</span> <span class="pre">3</span></em><a class="headerlink" href="#hdrCore.image.channel.sRGB" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="hdrCore.image.imageType">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">hdrCore.image.</span></span><span class="sig-name descname"><span class="pre">imageType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hdrCore.image.imageType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>This class contains a list of constant values for different type of images.</p>
+<p>The constants are : SDR, RAW, HDR.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hdrCore.image.imageType.ARW">
+<span class="sig-name descname"><span class="pre">ARW</span></span><em class="property"> <span class="pre">=</span> <span class="pre">1</span></em><a class="headerlink" href="#hdrCore.image.imageType.ARW" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hdrCore.image.imageType.HDR">
+<span class="sig-name descname"><span class="pre">HDR</span></span><em class="property"> <span class="pre">=</span> <span class="pre">2</span></em><a class="headerlink" href="#hdrCore.image.imageType.HDR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hdrCore.image.imageType.SDR">
+<span class="sig-name descname"><span class="pre">SDR</span></span><em class="property"> <span class="pre">=</span> <span class="pre">0</span></em><a class="headerlink" href="#hdrCore.image.imageType.SDR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-hdrCore.metadata">
+<span id="hdrcore-metadata-module"></span><h2>hdrCore.metadata module<a class="headerlink" href="#module-hdrCore.metadata" title="Permalink to this headline">¶</a></h2>
+<p>package hdrCore consists of the core classes for HDR imaging:
+(1) classes:    class imageType</p>
+<blockquote>
+<div><p>class channel
+class Image
+class ColorSpace 
+class Histogram</p>
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li><p>class:      class metadata</p></li>
+<li><dl class="simple">
+<dt>processing functions and classes:</dt><dd><p>def XYZ_to_sRGB(XYZ,apply_cctf_encoding=True):
+def sRGB_to_XYZ(RGB,apply_cctf_decoding=True):  
+def Lab_to_XYZ(Lab)
+def XYZ_to_Lab(XYZ)
+def Lab_to_sRGB(Lab, apply_cctf_encoding=True, clip = False)
+def sRGB_to_Lab(RGB, apply_cctf_decoding=True)
+def Lch_to_sRGB(Lch,apply_cctf_encoding=True, clip=False)   
+class Processing(object)
+class tmo_cctf(Processing)
+class exposure(Processing)
+class contrast(Processing)
+class clip(Processing)
+class ColorSpaceTransform(Processing)
+class resize(Processing)
+class Ycurve(Processing)
+class saturation(Processing)
+class lightnessMask(Processing)
+class geometry(Processing)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>processing nodes that encapsulate processing objects in process-pipe: </dt><dd><p>class ProcessNode(object)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>process-pipe that defines the pipeline of processing:</dt><dd><p>class ProcessPipe(object)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>some utils functions:</dt><dd><p>def filenamesplit(filename)
+def filterlistdir(path,extList)
+def ndarray2vector(nda)
+def NPlinearWeightMask(x,xMin,xMax,xTolerance)
+def croppRotated(h,w,alpha)</p>
+</dd>
+</dl>
+</li>
+<li><p>HDRdisplay model</p></li>
+</ol>
+<dl class="py class">
+<dt class="sig sig-object py" id="hdrCore.metadata.metadata">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">hdrCore.metadata.</span></span><span class="sig-name descname"><span class="pre">metadata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_image</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hdrCore.metadata.metadata" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>The metadatas of the image can be store in an object of this class. The informations
+which can be stored are : filename, path, a description, the exif data, the category,
+the processes to apply on the image.</p>
+<dl class="simple">
+<dt>Atributes:</dt><dd><dl class="simple">
+<dt>metadata: TODO</dt><dd><p>TODO</p>
+</dd>
+<dt>image: TODO</dt><dd><p>TODO</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="hdrCore.metadata.metadata.build">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">build</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_image</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hdrCore.metadata.metadata.build" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build metadata object from an image.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>_image: TODO</dt><dd><p>TODO</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>TODO</dt><dd><p>TODO</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hdrCore.metadata.metadata.readExif">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">readExif</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hdrCore.metadata.metadata.readExif" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return exif (Dict) from image file</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>filename: str</dt><dd><p>Name of the image file.</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>TODO</dt><dd><p>TODO</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hdrCore.metadata.metadata.recoverData">
+<span class="sig-name descname"><span class="pre">recoverData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exif</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hdrCore.metadata.metadata.recoverData" title="Permalink to this definition">¶</a></dt>
+<dd><p>TODO - Documentation de la méthode recoverData</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>exif: TODO</dt><dd><p>TODO</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hdrCore.metadata.metadata.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hdrCore.metadata.metadata.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save the metadata in a json file. The extension .json is added to the filename of the image.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hdrCore.metadata.metadata.defaultColorSpaceName">
+<span class="sig-name descname"><span class="pre">defaultColorSpaceName</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'sRGB'</span></em><a class="headerlink" href="#hdrCore.metadata.metadata.defaultColorSpaceName" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-hdrCore.processing">
+<span id="hdrcore-processing-module"></span><h2>hdrCore.processing module<a class="headerlink" href="#module-hdrCore.processing" title="Permalink to this headline">¶</a></h2>
+<p>package hdrCore consists of the core classes for HDR imaging:
+(1) classes:    class imageType</p>
+<blockquote>
+<div><p>class channel
+class Image
+class ColorSpace 
+class Histogram</p>
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li><p>class:      class metadata</p></li>
+<li><dl class="simple">
+<dt>processing functions and classes:</dt><dd><p>def XYZ_to_sRGB(XYZ,apply_cctf_encoding=True):
+def sRGB_to_XYZ(RGB,apply_cctf_decoding=True):  
+def Lab_to_XYZ(Lab)
+def XYZ_to_Lab(XYZ)
+def Lab_to_sRGB(Lab, apply_cctf_encoding=True, clip = False)
+def sRGB_to_Lab(RGB, apply_cctf_decoding=True)
+def Lch_to_sRGB(Lch,apply_cctf_encoding=True, clip=False)   
+class Processing(object)
+class tmo_cctf(Processing)
+class exposure(Processing)
+class contrast(Processing)
+class clip(Processing)
+class ColorSpaceTransform(Processing)
+class resize(Processing)
+class Ycurve(Processing)
+class saturation(Processing)
+class lightnessMask(Processing)
+class geometry(Processing)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>processing nodes that encapsulate processing objects in process-pipe: </dt><dd><p>class ProcessNode(object)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>process-pipe that defines the pipeline of processing:</dt><dd><p>class ProcessPipe(object)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>some utils functions:</dt><dd><p>def filenamesplit(filename)
+def filterlistdir(path,extList)
+def ndarray2vector(nda)
+def NPlinearWeightMask(x,xMin,xMax,xTolerance)
+def croppRotated(h,w,alpha)</p>
+</dd>
+</dl>
+</li>
+<li><p>HDRdisplay model</p></li>
+</ol>
+<dl class="py class">
+<dt class="sig sig-object py" id="hdrCore.processing.ColorSpaceTransform">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">hdrCore.processing.</span></span><span class="sig-name descname"><span class="pre">ColorSpaceTransform</span></span><a class="headerlink" href="#hdrCore.processing.ColorSpaceTransform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#hdrCore.processing.Processing" title="hdrCore.processing.Processing"><code class="xref py py-class docutils literal notranslate"><span class="pre">hdrCore.processing.Processing</span></code></a></p>
+<p>TODO - Documentation de la colorspace transorm processing</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="hdrCore.processing.ColorSpaceTransform.compute">
+<span class="sig-name descname"><span class="pre">compute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hdrCore.processing.ColorSpaceTransform.compute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Color space transform operator</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>img: hdrCore.image.Image</dt><dd><p>Required  : hdr image</p>
+</dd>
+<dt>kwargs: dict</dt><dd><p>Optionnal : parameters
+TODO</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>TODO</dt><dd><p>TODO</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="hdrCore.processing.ProcessPipe">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">hdrCore.processing.</span></span><span class="sig-name descname"><span class="pre">ProcessPipe</span></span><a class="headerlink" href="#hdrCore.processing.ProcessPipe" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>TODO - Documentation de la classe ProcessPipe</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><dl class="simple">
+<dt>originalImage: TODO</dt><dd><p>TODO</p>
+</dd>
+<dt>__inputImage: TODO</dt><dd><p>TODO</p>
+</dd>
+<dt>__outputImage: TODO</dt><dd><p>TODO</p>
+</dd>
+<dt>processNodes: TODO</dt><dd><p>TODO</p>
+</dd>
+<dt>previewHDR: boolean</dt><dd><p>TODO</p>
+</dd>
+<dt>previewHDR_process: TODO</dt><dd><p>TODO</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py class">
+<dt class="sig sig-object py" id="hdrCore.processing.ProcessPipe.ProcessNode">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">ProcessNode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">process</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">paramDict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hdrCore.processing.ProcessPipe.ProcessNode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="hdrCore.processing.ProcessPipe.ProcessNode.compute">
+<span class="sig-name descname"><span class="pre">compute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hdrCore.processing.ProcessPipe.ProcessNode.compute" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hdrCore.processing.ProcessPipe.ProcessNode.condCompute">
+<span class="sig-name descname"><span class="pre">condCompute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hdrCore.processing.ProcessPipe.ProcessNode.condCompute" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hdrCore.processing.ProcessPipe.ProcessNode.getParameters">
+<span class="sig-name descname"><span class="pre">getParameters</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hdrCore.processing.ProcessPipe.ProcessNode.getParameters" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hdrCore.processing.ProcessPipe.ProcessNode.setParameters">
+<span class="sig-name descname"><span class="pre">setParameters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">paramDict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hdrCore.processing.ProcessPipe.ProcessNode.setParameters" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hdrCore.processing.ProcessPipe.ProcessNode.toDict">
+<span class="sig-name descname"><span class="pre">toDict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hdrCore.processing.ProcessPipe.ProcessNode.toDict" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hdrCore.processing.ProcessPipe.ProcessNode.id">
+<span class="sig-name descname"><span class="pre">id</span></span><em class="property"> <span class="pre">=</span> <span class="pre">0</span></em><a class="headerlink" href="#hdrCore.processing.ProcessPipe.ProcessNode.id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hdrCore.processing.ProcessPipe.append">
+<span class="sig-name descname"><span class="pre">append</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">process</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">paramDict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hdrCore.processing.ProcessPipe.append" title="Permalink to this definition">¶</a></dt>
+<dd><p>TODO - Documentation de la méthode append</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>process: TODO</dt><dd><p>TODO</p>
+</dd>
+<dt>paramDict: TODO</dt><dd><p>TODO</p>
+</dd>
+<dt>name: TODO</dt><dd><p>TODO</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>TODO</dt><dd><p>TODO</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hdrCore.processing.ProcessPipe.compute">
+<span class="sig-name descname"><span class="pre">compute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">progress</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hdrCore.processing.ProcessPipe.compute" title="Permalink to this definition">¶</a></dt>
+<dd><p>TODO - Documentation de la méthode compute</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>progress: TODO</dt><dd><p>TODO</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hdrCore.processing.ProcessPipe.export">
+<span class="sig-name descname"><span class="pre">export</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dirName</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">progress</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hdrCore.processing.ProcessPipe.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>TODO - Documentation de la méthode export</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>dirName: TODO
+size: TODO
+to: TODO
+progress: TODO</p>
+</dd>
+<dt>Returns:</dt><dd><p>(hdrCore.image.Image)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hdrCore.processing.ProcessPipe.getImage">
+<span class="sig-name descname"><span class="pre">getImage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">toneMap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hdrCore.processing.ProcessPipe.getImage" title="Permalink to this definition">¶</a></dt>
+<dd><p>TODO - Documentation de la méthode getImage</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>toneMap: TODO</dt><dd><p>TODO</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>TODO</dt><dd><p>TODO</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hdrCore.processing.ProcessPipe.getInputImage">
+<span class="sig-name descname"><span class="pre">getInputImage</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hdrCore.processing.ProcessPipe.getInputImage" title="Permalink to this definition">¶</a></dt>
+<dd><p>TODO - Documentation de la méthode getInputImage</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>TODO</dt><dd><p>TODO</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hdrCore.processing.ProcessPipe.getName">
+<span class="sig-name descname"><span class="pre">getName</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hdrCore.processing.ProcessPipe.getName" title="Permalink to this definition">¶</a></dt>
+<dd><p>TODO - Documentation de la méthode getName</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>TODO</dt><dd><p>TODO</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hdrCore.processing.ProcessPipe.getParameters">
+<span class="sig-name descname"><span class="pre">getParameters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hdrCore.processing.ProcessPipe.getParameters" title="Permalink to this definition">¶</a></dt>
+<dd><p>TODO - Documentation de la méthode getParameters</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>id: TODO</dt><dd><p>TODO</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>TODO</dt><dd><p>TODO</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hdrCore.processing.ProcessPipe.getProcessNodeByName">
+<span class="sig-name descname"><span class="pre">getProcessNodeByName</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hdrCore.processing.ProcessPipe.getProcessNodeByName" title="Permalink to this definition">¶</a></dt>
+<dd><p>TODO - Documentation de la méthode getProcessNodeByName</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>name: TODO</dt><dd><p>TODO</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>TODO</dt><dd><p>TODO</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hdrCore.processing.ProcessPipe.setImage">
+<span class="sig-name descname"><span class="pre">setImage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hdrCore.processing.ProcessPipe.setImage" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>set the input image to the process-pipeline:</dt><dd><ol class="arabic simple">
+<li><p>a copy of the image is set to ‘originalImage’</p></li>
+<li><p>if ProcessPipe.autoResize: the image is resized</p></li>
+<li><p>the (resize) is set to ‘__inputImage’</p></li>
+<li><p>a copy of the resized image is set to ‘__outputImage’ (for display)</p></li>
+<li><p>initialize processpipe using ‘img.metadata’</p></li>
+<li><p>for all processes in the pipe ‘requireUpdate’ is set to True</p></li>
+</ol>
+</dd>
+<dt>Args:</dt><dd><p>img (hdrCore.image.Image, Required) : input image</p>
+</dd>
+</dl>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hdrCore.processing.ProcessPipe.setParameters">
+<span class="sig-name descname"><span class="pre">setParameters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">paramDicts</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hdrCore.processing.ProcessPipe.setParameters" title="Permalink to this definition">¶</a></dt>
+<dd><p>TODO - Documentation de la méthode setParameters</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>id: TODO</dt><dd><p>TODO</p>
+</dd>
+<dt>paramDicts: TODO</dt><dd><p>TODO</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hdrCore.processing.ProcessPipe.toDict">
+<span class="sig-name descname"><span class="pre">toDict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hdrCore.processing.ProcessPipe.toDict" title="Permalink to this definition">¶</a></dt>
+<dd><p>TODO - Documentation de la méthode toDict</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>TODO</dt><dd><p>TODO</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hdrCore.processing.ProcessPipe.updateHDRuseCase">
+<span class="sig-name descname"><span class="pre">updateHDRuseCase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hdrmeta</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hdrCore.processing.ProcessPipe.updateHDRuseCase" title="Permalink to this definition">¶</a></dt>
+<dd><p>TODO - Documentation de la méthode updateHDRuseCase</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>hdrmeta: TODO</dt><dd><p>TODO</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hdrCore.processing.ProcessPipe.updateProcessPipeMetadata">
+<span class="sig-name descname"><span class="pre">updateProcessPipeMetadata</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hdrCore.processing.ProcessPipe.updateProcessPipeMetadata" title="Permalink to this definition">¶</a></dt>
+<dd><p>TODO - Documentation de la méthode updateProcessPipeMetadata</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hdrCore.processing.ProcessPipe.autoResize">
+<span class="sig-name descname"><span class="pre">autoResize</span></span><em class="property"> <span class="pre">=</span> <span class="pre">True</span></em><a class="headerlink" href="#hdrCore.processing.ProcessPipe.autoResize" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hdrCore.processing.ProcessPipe.maxSize">
+<span class="sig-name descname"><span class="pre">maxSize</span></span><em class="property"> <span class="pre">=</span> <span class="pre">1200</span></em><a class="headerlink" href="#hdrCore.processing.ProcessPipe.maxSize" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hdrCore.processing.ProcessPipe.maxWorking">
+<span class="sig-name descname"><span class="pre">maxWorking</span></span><em class="property"> <span class="pre">=</span> <span class="pre">1200</span></em><a class="headerlink" href="#hdrCore.processing.ProcessPipe.maxWorking" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="hdrCore.processing.Processing">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">hdrCore.processing.</span></span><span class="sig-name descname"><span class="pre">Processing</span></span><a class="headerlink" href="#hdrCore.processing.Processing" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>TODO - Documentation de la classe Processing</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="hdrCore.processing.Processing.compute">
+<span class="sig-name descname"><span class="pre">compute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hdrCore.processing.Processing.compute" title="Permalink to this definition">¶</a></dt>
+<dd><p>TODO - Documentation de la méthode compute</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>image: TODO</dt><dd><p>TODO</p>
+</dd>
+<dt>kwargs: TODO</dt><dd><p>TODO</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>TODO</dt><dd><p>TODO</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="hdrCore.processing.Ycurve">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">hdrCore.processing.</span></span><span class="sig-name descname"><span class="pre">Ycurve</span></span><a class="headerlink" href="#hdrCore.processing.Ycurve" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#hdrCore.processing.Processing" title="hdrCore.processing.Processing"><code class="xref py py-class docutils literal notranslate"><span class="pre">hdrCore.processing.Processing</span></code></a></p>
+<p>TODO - Documentation de la classe Ycurve</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="hdrCore.processing.Ycurve.compute">
+<span class="sig-name descname"><span class="pre">compute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hdrCore.processing.Ycurve.compute" title="Permalink to this definition">¶</a></dt>
+<dd><p>compute: compute Ycurve according to parameters.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>img (hdrCore.image.Image, Required): image
+kwargs (dict,Optionnal): parameters gieven as dict</p>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>(hdrCore.image.Image, Required): image</dt><dd><p>result of Ycurve processing</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="hdrCore.processing.clip">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">hdrCore.processing.</span></span><span class="sig-name descname"><span class="pre">clip</span></span><a class="headerlink" href="#hdrCore.processing.clip" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#hdrCore.processing.Processing" title="hdrCore.processing.Processing"><code class="xref py py-class docutils literal notranslate"><span class="pre">hdrCore.processing.Processing</span></code></a></p>
+<p>TODO - Documentation de la classe clip</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="hdrCore.processing.clip.compute">
+<span class="sig-name descname"><span class="pre">compute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hdrCore.processing.clip.compute" title="Permalink to this definition">¶</a></dt>
+<dd><p>clip image color data</p>
+<dl>
+<dt>Args:</dt><dd><p>img (hdrCore.image.Image, Required): input image image
+kwargs(dict, Optionnal) : parameters</p>
+<blockquote>
+<div><p>‘min’, ‘max’ : float, float</p>
+</div></blockquote>
+</dd>
+<dt>Returns:</dt><dd><p>(hdrCore.image.Image): output image</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="hdrCore.processing.colorEditor">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">hdrCore.processing.</span></span><span class="sig-name descname"><span class="pre">colorEditor</span></span><a class="headerlink" href="#hdrCore.processing.colorEditor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#hdrCore.processing.Processing" title="hdrCore.processing.Processing"><code class="xref py py-class docutils literal notranslate"><span class="pre">hdrCore.processing.Processing</span></code></a></p>
+<p>TODO - Documentation de la classe colorEditor</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="hdrCore.processing.colorEditor.compute">
+<span class="sig-name descname"><span class="pre">compute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hdrCore.processing.colorEditor.compute" title="Permalink to this definition">¶</a></dt>
+<dd><p>color editor operator</p>
+<dl>
+<dt>Args:</dt><dd><p>img (hdrCore.image.Image, Required): input image
+kwargs (dict, Optionnal): parameters</p>
+<blockquote>
+<div><dl class="simple">
+<dt>default value= { ‘selection’: {‘lightness’: (0,100),’chroma’: (0,100),’hue’:(0,360)}, </dt><dd><p>‘tolerance’: 0.1,
+‘edit’: {‘hue’:0.0,’exposure’:0.0,’contrast’:0.0,’saturation’:0.0}, 
+‘mask’: False}</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd>
+<dt>Returns:</dt><dd><p>(hdrCore.image.Image): output image</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="hdrCore.processing.contrast">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">hdrCore.processing.</span></span><span class="sig-name descname"><span class="pre">contrast</span></span><a class="headerlink" href="#hdrCore.processing.contrast" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#hdrCore.processing.Processing" title="hdrCore.processing.Processing"><code class="xref py py-class docutils literal notranslate"><span class="pre">hdrCore.processing.Processing</span></code></a></p>
+<p>TODO - Documentation de la classe contrast</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="hdrCore.processing.contrast.compute">
+<span class="sig-name descname"><span class="pre">compute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hdrCore.processing.contrast.compute" title="Permalink to this definition">¶</a></dt>
+<dd><p>contrast operator.</p>
+<dl>
+<dt>Args:</dt><dd><p>img (hdrCore.image.Image,  Required): input image
+kwargs (dict, Optionnal) : parameters</p>
+<blockquote>
+<div><p>“contrast”: float</p>
+<p>default value: { “contrast”: 0 }</p>
+</div></blockquote>
+</dd>
+<dt>Returns:</dt><dd><p>(hdrCore.image.Image,  Required): output image</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="hdrCore.processing.exposure">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">hdrCore.processing.</span></span><span class="sig-name descname"><span class="pre">exposure</span></span><a class="headerlink" href="#hdrCore.processing.exposure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#hdrCore.processing.Processing" title="hdrCore.processing.Processing"><code class="xref py py-class docutils literal notranslate"><span class="pre">hdrCore.processing.Processing</span></code></a></p>
+<p>TODO - Documentation de la classe exposure</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="hdrCore.processing.exposure.auto">
+<span class="sig-name descname"><span class="pre">auto</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hdrCore.processing.exposure.auto" title="Permalink to this definition">¶</a></dt>
+<dd><p>TODO - Documentation de la méthode auto</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>img: TODO</dt><dd><p>TODO</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>TODO</dt><dd><p>TODO</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hdrCore.processing.exposure.compute">
+<span class="sig-name descname"><span class="pre">compute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hdrCore.processing.exposure.compute" title="Permalink to this definition">¶</a></dt>
+<dd><p>exposure operator.</p>
+<dl>
+<dt>Args:</dt><dd><p>img (hdrCore.image.Image, Required)  : input image
+kwargs( dict, Optionnal) : parameters</p>
+<blockquote>
+<div><p>‘EV’: float</p>
+<p>default value: {‘EV’: 0.0}</p>
+</div></blockquote>
+</dd>
+<dt>Returns:</dt><dd><p>(hdrCore.image.Image): output image</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="hdrCore.processing.geometry">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">hdrCore.processing.</span></span><span class="sig-name descname"><span class="pre">geometry</span></span><a class="headerlink" href="#hdrCore.processing.geometry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#hdrCore.processing.Processing" title="hdrCore.processing.Processing"><code class="xref py py-class docutils literal notranslate"><span class="pre">hdrCore.processing.Processing</span></code></a></p>
+<p>TODO - Documentation de la classe geometry</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="hdrCore.processing.geometry.compute">
+<span class="sig-name descname"><span class="pre">compute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hdrCore.processing.geometry.compute" title="Permalink to this definition">¶</a></dt>
+<dd><p>geometry operator.</p>
+<dl>
+<dt>Args:</dt><dd><p>img (hdrCore.image.Image,Required): input image
+kwargs (dict,Optionnal) : parameters</p>
+<blockquote>
+<div><p>‘ratio’: (int,int)
+‘up’: int
+‘rotation’: float</p>
+<p>default value = { ‘ratio’: (16,9), ‘up’: 0,’rotation’: 0.0}</p>
+</div></blockquote>
+</dd>
+<dt>Returns:</dt><dd><p>(hdrCore.image.Image,Required): input image</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="hdrCore.processing.lightnessMask">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">hdrCore.processing.</span></span><span class="sig-name descname"><span class="pre">lightnessMask</span></span><a class="headerlink" href="#hdrCore.processing.lightnessMask" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#hdrCore.processing.Processing" title="hdrCore.processing.Processing"><code class="xref py py-class docutils literal notranslate"><span class="pre">hdrCore.processing.Processing</span></code></a></p>
+<p>TODO - Documentation de la classe lightnessMask</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="hdrCore.processing.lightnessMask.compute">
+<span class="sig-name descname"><span class="pre">compute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hdrCore.processing.lightnessMask.compute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Lightness Mask operator.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>img: hdrCore.image.Image</dt><dd><p>Required  : hdr image</p>
+</dd>
+<dt>kwargs: dict</dt><dd><p>Optionnal : parameters
+TODO</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>TODO</dt><dd><p>TODO</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="hdrCore.processing.resize">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">hdrCore.processing.</span></span><span class="sig-name descname"><span class="pre">resize</span></span><a class="headerlink" href="#hdrCore.processing.resize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#hdrCore.processing.Processing" title="hdrCore.processing.Processing"><code class="xref py py-class docutils literal notranslate"><span class="pre">hdrCore.processing.Processing</span></code></a></p>
+<p>TODO - Documentation de la classe Resize image processing</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="hdrCore.processing.resize.compute">
+<span class="sig-name descname"><span class="pre">compute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(None,</span> <span class="pre">None)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">anti_aliasing</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hdrCore.processing.resize.compute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resize operator.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>img: hdrCore.image.Image</dt><dd><p>Required : hdr image</p>
+</dd>
+<dt>size: TODO</dt><dd><p>TODO</p>
+</dd>
+<dt>anti_aliasing: boolean</dt><dd><p>TODO</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>TODO</dt><dd><p>TODO</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="hdrCore.processing.saturation">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">hdrCore.processing.</span></span><span class="sig-name descname"><span class="pre">saturation</span></span><a class="headerlink" href="#hdrCore.processing.saturation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#hdrCore.processing.Processing" title="hdrCore.processing.Processing"><code class="xref py py-class docutils literal notranslate"><span class="pre">hdrCore.processing.Processing</span></code></a></p>
+<p>TODO - Documentation de la classe saturation</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="hdrCore.processing.saturation.compute">
+<span class="sig-name descname"><span class="pre">compute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hdrCore.processing.saturation.compute" title="Permalink to this definition">¶</a></dt>
+<dd><p>saturation operator</p>
+<dl>
+<dt>Args:</dt><dd><p>img (hdrCore.image.Image,Required):  input image
+kwargs (dict, Optionnal) : parameters</p>
+<blockquote>
+<div><p>‘saturation’: float
+‘method’: str</p>
+<blockquote>
+<div><p>‘method’ parameter must be gamma</p>
+</div></blockquote>
+<p>default value: {‘saturation’: 0.0, ‘method’: ‘gamma’}</p>
+</div></blockquote>
+</dd>
+<dt>Returns:</dt><dd><p>(hdrCore.image.Image): output image</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="hdrCore.processing.tmo_cctf">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">hdrCore.processing.</span></span><span class="sig-name descname"><span class="pre">tmo_cctf</span></span><a class="headerlink" href="#hdrCore.processing.tmo_cctf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#hdrCore.processing.Processing" title="hdrCore.processing.Processing"><code class="xref py py-class docutils literal notranslate"><span class="pre">hdrCore.processing.Processing</span></code></a></p>
+<p>TODO - Documentation de la classe tmo_cctf</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="hdrCore.processing.tmo_cctf.compute">
+<span class="sig-name descname"><span class="pre">compute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hdrCore.processing.tmo_cctf.compute" title="Permalink to this definition">¶</a></dt>
+<dd><p>CCTF tone mapping operator</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>img: hdrCore.image.Image</dt><dd><p>Required  : hdr image</p>
+</dd>
+<dt>kwargs: dict</dt><dd><p>Optionnal : parameters
+‘function’          : ‘sRGB’        str</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>TODO</dt><dd><p>TODO</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hdrCore.processing.Lab_to_XYZ">
+<span class="sig-prename descclassname"><span class="pre">hdrCore.processing.</span></span><span class="sig-name descname"><span class="pre">Lab_to_XYZ</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Lab</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hdrCore.processing.Lab_to_XYZ" title="Permalink to this definition">¶</a></dt>
+<dd><p>convert pixel array from Lab to XYZ colorspace.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>Lab (numpy.ndarray, Required): array of pixels in Lab colorspace.</p>
+</dd>
+<dt>Returns:</dt><dd><p>(numpy.ndarray): array of pixels in XYZ colorspace.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hdrCore.processing.Lab_to_sRGB">
+<span class="sig-prename descclassname"><span class="pre">hdrCore.processing.</span></span><span class="sig-name descname"><span class="pre">Lab_to_sRGB</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Lab</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">apply_cctf_encoding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clip</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hdrCore.processing.Lab_to_sRGB" title="Permalink to this definition">¶</a></dt>
+<dd><p>convert pixel array from Lab to sRGB colorspace.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>Lab (numpy.ndarray, Required): array of pixels in Lab colorspace.
+apply_cctf_encoding (boolean, Optionnal): True to encode with sRGB cctf encoding function.
+clip (boolean, Optionnal): False do not clip values beyond colorspace limits (RGB values &lt; 0 or RGB values &gt; 1).</p>
+</dd>
+<dt>Returns:</dt><dd><p>(numpy.ndarray): array of pixels in sRGB colorspace.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hdrCore.processing.Lch_to_sRGB">
+<span class="sig-prename descclassname"><span class="pre">hdrCore.processing.</span></span><span class="sig-name descname"><span class="pre">Lch_to_sRGB</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Lch</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">apply_cctf_encoding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clip</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hdrCore.processing.Lch_to_sRGB" title="Permalink to this definition">¶</a></dt>
+<dd><p>convert pixel array from Lch to sRGB colorspace.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>Lch (numpy.ndarray, Required): array of pixels in Lab colorspace.
+apply_cctf_encoding (boolean, Optionnal): True to encode with sRGB cctf encoding function.
+clip (boolean, Optionnal): False do not clip values beyond colorspace limits (RGB values &lt; 0 or RGB values &gt; 1).</p>
+</dd>
+<dt>Returns:</dt><dd><p>(numpy.ndarray): array of pixels in sRGB colorspace.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hdrCore.processing.XYZ_to_Lab">
+<span class="sig-prename descclassname"><span class="pre">hdrCore.processing.</span></span><span class="sig-name descname"><span class="pre">XYZ_to_Lab</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">XYZ</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hdrCore.processing.XYZ_to_Lab" title="Permalink to this definition">¶</a></dt>
+<dd><p>convert pixel array from Lab to Lab colorspace.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>XYZ (numpy.ndarray, Required): array of pixels in Lab colorspace.</p>
+</dd>
+<dt>Returns:</dt><dd><p>(numpy.ndarray): array of pixels in Lab colorspace.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hdrCore.processing.XYZ_to_sRGB">
+<span class="sig-prename descclassname"><span class="pre">hdrCore.processing.</span></span><span class="sig-name descname"><span class="pre">XYZ_to_sRGB</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">XYZ</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">apply_cctf_encoding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hdrCore.processing.XYZ_to_sRGB" title="Permalink to this definition">¶</a></dt>
+<dd><p>convert pixel array from XYZ to sRGB colorspace.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>XYZ (numpy.ndarray, Required): array of pixels in XYZ colorspace.
+apply_cctf_encoding (boolean, Optionnal): True to encode with sRGB cctf encoding function.</p>
+</dd>
+<dt>Returns:</dt><dd><p>(numpy.ndarray): array of pixels in sRGB colorspace.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hdrCore.processing.sRGB_to_Lab">
+<span class="sig-prename descclassname"><span class="pre">hdrCore.processing.</span></span><span class="sig-name descname"><span class="pre">sRGB_to_Lab</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">RGB</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">apply_cctf_decoding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hdrCore.processing.sRGB_to_Lab" title="Permalink to this definition">¶</a></dt>
+<dd><p>convert pixel array from sRGB to Lab colorspace.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>RGB (numpy.ndarray, Required): array of pixels in RGB colorspace.
+apply_cctf_decoding (boolean, Optionnal): True to encode with sRGB cctf decoding function.</p>
+</dd>
+<dt>Returns:</dt><dd><p>(numpy.ndarray): array of pixels in sRGB colorspace.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hdrCore.processing.sRGB_to_XYZ">
+<span class="sig-prename descclassname"><span class="pre">hdrCore.processing.</span></span><span class="sig-name descname"><span class="pre">sRGB_to_XYZ</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">RGB</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">apply_cctf_decoding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hdrCore.processing.sRGB_to_XYZ" title="Permalink to this definition">¶</a></dt>
+<dd><p>convert pixel array from sRGB to XYZ colorspace.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>RGB (numpy.ndarray, Required): array of pixels in sRGB colorspace.
+apply_cctf_decoding (boolean, Optionnal): True to encode with sRGB cctf decoding function.</p>
+</dd>
+<dt>Returns:</dt><dd><p>(numpy.ndarray): array of pixels in XYZ colorspace.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-hdrCore.quality">
+<span id="hdrcore-quality-module"></span><h2>hdrCore.quality module<a class="headerlink" href="#module-hdrCore.quality" title="Permalink to this headline">¶</a></h2>
+<p>package hdrCore consists of the core classes for HDR imaging:
+(1) classes:    class imageType</p>
+<blockquote>
+<div><p>class channel
+class Image
+class ColorSpace 
+class Histogram</p>
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li><p>class:      class metadata</p></li>
+<li><dl class="simple">
+<dt>processing functions and classes:</dt><dd><p>def XYZ_to_sRGB(XYZ,apply_cctf_encoding=True):
+def sRGB_to_XYZ(RGB,apply_cctf_decoding=True):  
+def Lab_to_XYZ(Lab)
+def XYZ_to_Lab(XYZ)
+def Lab_to_sRGB(Lab, apply_cctf_encoding=True, clip = False)
+def sRGB_to_Lab(RGB, apply_cctf_decoding=True)
+def Lch_to_sRGB(Lch,apply_cctf_encoding=True, clip=False)   
+class Processing(object)
+class tmo_cctf(Processing)
+class exposure(Processing)
+class contrast(Processing)
+class clip(Processing)
+class ColorSpaceTransform(Processing)
+class resize(Processing)
+class Ycurve(Processing)
+class saturation(Processing)
+class lightnessMask(Processing)
+class geometry(Processing)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>processing nodes that encapsulate processing objects in process-pipe: </dt><dd><p>class ProcessNode(object)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>process-pipe that defines the pipeline of processing:</dt><dd><p>class ProcessPipe(object)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>some utils functions:</dt><dd><p>def filenamesplit(filename)
+def filterlistdir(path,extList)
+def ndarray2vector(nda)
+def NPlinearWeightMask(x,xMin,xMax,xTolerance)
+def croppRotated(h,w,alpha)</p>
+</dd>
+</dl>
+</li>
+<li><p>HDRdisplay model</p></li>
+</ol>
+<dl class="py class">
+<dt class="sig sig-object py" id="hdrCore.quality.quality">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">hdrCore.quality.</span></span><span class="sig-name descname"><span class="pre">quality</span></span><a class="headerlink" href="#hdrCore.quality.quality" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>TODO - Documentation de la classe quality</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><dl class="simple">
+<dt>_image: TODO</dt><dd><p>TODO</p>
+</dd>
+<dt>imageNpath: TODO</dt><dd><p>TODO</p>
+</dd>
+<dt>user: TODO</dt><dd><p>TODO</p>
+</dd>
+<dt>score: TODO</dt><dd><p>TODO</p>
+</dd>
+<dt>artifact: TODO</dt><dd><p>TODO</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="hdrCore.quality.quality.toDict">
+<span class="sig-name descname"><span class="pre">toDict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hdrCore.quality.quality.toDict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert the object into a dict.</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>TODO</dt><dd><p>TODO</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-hdrCore.utils">
+<span id="hdrcore-utils-module"></span><h2>hdrCore.utils module<a class="headerlink" href="#module-hdrCore.utils" title="Permalink to this headline">¶</a></h2>
+<p>package hdrCore consists of the core classes for HDR imaging:
+(1) classes:    class imageType</p>
+<blockquote>
+<div><p>class channel
+class Image
+class ColorSpace 
+class Histogram</p>
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li><p>class:      class metadata</p></li>
+<li><dl class="simple">
+<dt>processing functions and classes:</dt><dd><p>def XYZ_to_sRGB(XYZ,apply_cctf_encoding=True):
+def sRGB_to_XYZ(RGB,apply_cctf_decoding=True):  
+def Lab_to_XYZ(Lab)
+def XYZ_to_Lab(XYZ)
+def Lab_to_sRGB(Lab, apply_cctf_encoding=True, clip = False)
+def sRGB_to_Lab(RGB, apply_cctf_decoding=True)
+def Lch_to_sRGB(Lch,apply_cctf_encoding=True, clip=False)   
+class Processing(object)
+class tmo_cctf(Processing)
+class exposure(Processing)
+class contrast(Processing)
+class clip(Processing)
+class ColorSpaceTransform(Processing)
+class resize(Processing)
+class Ycurve(Processing)
+class saturation(Processing)
+class lightnessMask(Processing)
+class geometry(Processing)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>processing nodes that encapsulate processing objects in process-pipe: </dt><dd><p>class ProcessNode(object)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>process-pipe that defines the pipeline of processing:</dt><dd><p>class ProcessPipe(object)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>some utils functions:</dt><dd><p>def filenamesplit(filename)
+def filterlistdir(path,extList)
+def ndarray2vector(nda)
+def NPlinearWeightMask(x,xMin,xMax,xTolerance)
+def croppRotated(h,w,alpha)</p>
+</dd>
+</dl>
+</li>
+<li><p>HDRdisplay model</p></li>
+</ol>
+<dl class="py function">
+<dt class="sig sig-object py" id="hdrCore.utils.NPlinearWeightMask">
+<span class="sig-prename descclassname"><span class="pre">hdrCore.utils.</span></span><span class="sig-name descname"><span class="pre">NPlinearWeightMask</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xMin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xMax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xTolerance</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hdrCore.utils.NPlinearWeightMask" title="Permalink to this definition">¶</a></dt>
+<dd><p>TODO - Documentation de la méthode NPlinearWeightMask</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>x: TODO</dt><dd><p>TODO</p>
+</dd>
+<dt>xMin: TODO</dt><dd><p>TODO</p>
+</dd>
+<dt>xMax: TODO</dt><dd><p>TODO</p>
+</dd>
+<dt>xTolerance: TODO</dt><dd><p>TODO</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>TODO</dt><dd><p>TODO</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hdrCore.utils.croppRotated">
+<span class="sig-prename descclassname"><span class="pre">hdrCore.utils.</span></span><span class="sig-name descname"><span class="pre">croppRotated</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">h</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">w</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hdrCore.utils.croppRotated" title="Permalink to this definition">¶</a></dt>
+<dd><p>TODO - Documentation de la méthode croppRotated</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>h: TODO</dt><dd><p>TODO</p>
+</dd>
+<dt>w: TODO</dt><dd><p>TODO</p>
+</dd>
+<dt>alpha: TODO</dt><dd><p>TODO</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>TODO</dt><dd><p>TODO</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hdrCore.utils.filenamesplit">
+<span class="sig-prename descclassname"><span class="pre">hdrCore.utils.</span></span><span class="sig-name descname"><span class="pre">filenamesplit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hdrCore.utils.filenamesplit" title="Permalink to this definition">¶</a></dt>
+<dd><p>retrieve path, name and extension from a filename.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>filename (str,Required): filename</p>
+</dd>
+<dt>Returns:</dt><dd><p>(str,str,str): (path,name,ext)</p>
+</dd>
+<dt>Example:</dt><dd><p>filenamesplit(“./dir0/dir1/name.ext”) returns (“./dir0/dir1/”,”name”,”ext”)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hdrCore.utils.filterlistdir">
+<span class="sig-prename descclassname"><span class="pre">hdrCore.utils.</span></span><span class="sig-name descname"><span class="pre">filterlistdir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extList</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hdrCore.utils.filterlistdir" title="Permalink to this definition">¶</a></dt>
+<dd><p>return the files in path that end by one of the string in extList</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>path (str, Required): path to directory
+extList (tuple of str, Required)</p>
+</dd>
+<dt>Returns:</dt><dd><p>([str])or (tuple of str) or (str): list, tuple or single str</p>
+</dd>
+<dt>Example:</dt><dd><p>filterlistdir(‘./images/’, (‘.jpg’, ‘.JPG’, ‘.png’))</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hdrCore.utils.ndarray2vector">
+<span class="sig-prename descclassname"><span class="pre">hdrCore.utils.</span></span><span class="sig-name descname"><span class="pre">ndarray2vector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nda</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hdrCore.utils.ndarray2vector" title="Permalink to this definition">¶</a></dt>
+<dd><p>transform 2D array of color data to vector</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>nda (numpy.ndarray, Required): numpy array (2D of scalar or vector)</p>
+</dd>
+<dt>Returns:</dt><dd><p>(numpy.ndarray, Required): numpy array (1D of scalar or vector)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-hdrCore">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-hdrCore" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+
+
+             </article>
+             
+            </div>
+            <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="uHDR.html" class="btn btn-neutral float-right" title="uHDR module" accesskey="n" rel="next">Next <img src="_static/images/chevron-right-orange.svg" class="next-page"></a>
+      
+      
+        <a href="modules.html" class="btn btn-neutral" title="uHDR_documente" accesskey="p" rel="prev"><img src="_static/images/chevron-right-orange.svg" class="previous-page"> Previous</a>
+      
+    </div>
+  
+
+  
+
+    <hr>
+
+  
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2021, Rémi Cozot.
+
+    </p>
+  </div>
+    
+      <div>
+        Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+      </div>
+     
+
+</footer>
+
+          </div>
+        </div>
+
+        <div class="pytorch-content-right" id="pytorch-content-right">
+          <div class="pytorch-right-menu" id="pytorch-right-menu">
+            <div class="pytorch-side-scroll" id="pytorch-side-scroll-right">
+              <ul>
+<li><a class="reference internal" href="#">hdrCore package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-hdrCore.image">hdrCore.image module</a></li>
+<li><a class="reference internal" href="#module-hdrCore.metadata">hdrCore.metadata module</a></li>
+<li><a class="reference internal" href="#module-hdrCore.processing">hdrCore.processing module</a></li>
+<li><a class="reference internal" href="#module-hdrCore.quality">hdrCore.quality module</a></li>
+<li><a class="reference internal" href="#module-hdrCore.utils">hdrCore.utils module</a></li>
+<li><a class="reference internal" href="#module-hdrCore">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+  
+
+
+  
+
+     
+       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+         <script src="_static/jquery.js"></script>
+         <script src="_static/underscore.js"></script>
+         <script src="_static/doctools.js"></script>
+     
+
+  
+
+  <script type="text/javascript" src="_static/js/vendor/popper.min.js"></script>
+  <script type="text/javascript" src="_static/js/vendor/bootstrap.min.js"></script>
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+  <!-- Begin Footer -->
+
+  <div class="container-fluid" id="docs-tutorials-resources">
+    <div class="container">
+      <div class="row">
+        <!--
+        <div class="col-md-4 text-center">
+          <h2>Docs</h2>
+          <p>Access comprehensive developer documentation for PyTorch</p>
+          <a class="with-right-arrow" href="https://pytorch.org/docs/stable/index.html">View Docs</a>
+        </div>
+
+        <div class="col-md-4 text-center">
+          <h2>Tutorials</h2>
+          <p>Get in-depth tutorials for beginners and advanced developers</p>
+          <a class="with-right-arrow" href="https://pytorch.org/tutorials">View Tutorials</a>
+        </div>
+
+        <div class="col-md-4 text-center">
+          <h2>Resources</h2>
+          <p>Find development resources and get your questions answered</p>
+          <a class="with-right-arrow" href="https://pytorch.org/resources">View Resources</a>
+        </div>
+        -->
+      </div>
+    </div>
+  </div>
+
+
+  <!-- <footer class="site-footer">
+    <div class="container footer-container">
+      <div class="footer-logo-wrapper">
+        <a href="https://github.com/mpariente/asteroid" class="footer-logo"></a>
+      </div>
+
+      <div class="footer-links-wrapper">
+
+        <div class="footer-logo-col">
+          <img class="footer-logo-img" src="_static/images/dark_asteroid_logo.svg"/>
+        </div>
+
+        <div class="footer-links-col">
+          <ul>
+            <li class="list-title"><a href="https://github.com/mpariente/asteroid">Asteroid</a></li>
+            <li><a href="https://pytorch.org/get-started">Get Started</a></li>
+            <li><a href="https://pytorch.org/features">Features</a></li>
+            <li><a href="">Ecosystem</a></li>
+            <li><a href="https://pytorch.org/blog/">Blog</a></li>
+            <li><a href="https://pytorch.org/resources">Resources</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links-col">
+          <ul>
+            <li class="list-title"><a href="https://pytorch.org/support">Support</a></li>
+            <li><a href="https://pytorch.org/tutorials">Tutorials</a></li>
+            <li><a href="https://pytorch.org/docs/stable/index.html">Docs</a></li>
+            <li><a href="https://discuss.pytorch.org" target="_blank">Discuss</a></li>
+            <li><a href="https://github.com/mpariente/asteroid/issues" target="_blank">Github Issues</a></li>
+            <li><a href="" target="_blank">Slack</a></li>
+            <li><a href="https://github.com/mpariente/asteroid/blob/master/CONTRIBUTING.md" target="_blank">Contributing</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links-col follow-us-col">
+          <ul>
+            <li class="list-title">Follow Us</li>
+            <li>
+              <div id="mc_embed_signup">
+                <form
+                  action="https://twitter.us14.list-manage.com/subscribe/post?u=75419c71fe0a935e53dfa4a3f&id=91d0dccd39"
+                  method="post"
+                  id="mc-embedded-subscribe-form"
+                  name="mc-embedded-subscribe-form"
+                  class="email-subscribe-form validate"
+                  target="_blank"
+                  novalidate>
+                  <div id="mc_embed_signup_scroll" class="email-subscribe-form-fields-wrapper">
+                    <div class="mc-field-group">
+                      <label for="mce-EMAIL" style="display:none;">Email Address</label>
+                      <input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL" placeholder="Email Address">
+                    </div>
+
+                    <div id="mce-responses" class="clear">
+                      <div class="response" id="mce-error-response" style="display:none"></div>
+                      <div class="response" id="mce-success-response" style="display:none"></div>
+                    </div>
+
+                    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_75419c71fe0a935e53dfa4a3f_91d0dccd39" tabindex="-1" value=""></div>
+
+                    <div class="clear">
+                      <input type="submit" value="" name="subscribe" id="mc-embedded-subscribe" class="button email-subscribe-button">
+                    </div>
+                  </div>
+                </form>
+              </div>
+
+            </li>
+          </ul>
+
+          <div class="footer-social-icons">
+            <a href="" target="_blank" class="facebook"></a>
+            <a href="https://twitter.com" target="_blank" class="twitter"></a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </footer> -->
+
+
+  <!-- End Footer -->
+
+  <!-- Begin Mobile Menu -->
+
+  <div class="mobile-main-menu">
+    <div class="container-fluid">
+      <div class="container">
+        <div class="mobile-main-menu-header-container">
+          <a class="header-logo" href="https://github.com/mpariente/asteroid" aria-label="PyTorch Lightning"></a>
+          <a class="main-menu-close-button" href="#" data-behavior="close-mobile-menu"></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="mobile-main-menu-links-container">
+      <div class="main-menu">
+        <ul>
+          <li>
+            <a href="https://pytorch.org/get-started">Get Started</a>
+          </li>
+
+          <li>
+            <a href="https://pytorch.org/features">Features</a>
+          </li>
+
+          <li>
+            <a href="https://pytorch.org/blog/">Blog</a>
+          </li>
+
+          <li>
+            <a href="https://pytorch.org/tutorials">Tutorials</a>
+          </li>
+
+          <li>
+            <a href="https://pytorch.org/docs/stable/index.html">Docs</a>
+          </li>
+
+          <li>
+            <a href="https://pytorch.org/resources">Resources</a>
+          </li>
+
+          <li>
+            <a href="https://github.com/mpariente/asteroid">Github</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- End Mobile Menu -->
+
+  <script type="text/javascript" src="_static/js/vendor/anchor.min.js"></script>
+
+  <script type="text/javascript">
+    $(document).ready(function() {
+      mobileMenu.bind();
+      mobileTOC.bind();
+      pytorchAnchors.bind();
+      sideMenus.bind();
+      scrollToAnchor.bind();
+      highlightNavigation.bind();
+      mainMenuDropdown.bind();
+
+      // Add class to links that have code blocks, since we cannot create links in code blocks
+      $("article.pytorch-article a span.pre").each(function(e) {
+        $(this).closest("a").addClass("has-code");
+      });
+    })
+  </script>
+</body>
+</html>
