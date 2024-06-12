@@ -23,7 +23,7 @@ from app.Jexif import Jexif
 
 import preferences.Prefs
 from guiQt.MainWindow import MainWindow
-from app.ImageFIles import ImageFiles
+from app.ImageFiles import ImageFiles
 from app.Tags import Tags
 from app.SelectionMap import SelectionMap
 

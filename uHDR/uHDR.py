@@ -42,6 +42,8 @@ if __name__ == '__main__':
     print("---- author(s): Rémi Cozot, remi.cozot@univ-littoral.fr                            ----")
     print("----            Rémi Synave, remi.synave@univ-littoral.fr                          ----")
     print("----            Jing Zhang, jing.zhang@univ-littoral.fr                            ----")
+    print("----            Noa Watel, noa.watel@univ-littoral.fr                            ----")
+    print("----            Antoine Bacquet, antoine.bacquet@univ-littoral.fr                            ----")
     print("---------------------------------------------------------------------------------------")
     print("---- date: uHDRv1:2019, uHDRv7: 2024                                               ----")
     print("---------------------------------------------------------------------------------------")
