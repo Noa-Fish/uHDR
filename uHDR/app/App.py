@@ -30,7 +30,15 @@ from app.SelectionMap import SelectionMap
 # ------------------------------------------------------------------------------------------
 # --- class App ----------------------------------------------------------------------------
 # ------------------------------------------------------------------------------------------
-debug : bool = True
+# imports additionnels nécessaires
+import copy
+import numpy as np
+import math
+import colour
+from timeit import default_timer as timer
+
+from hdrCore.processing import exposure
+
 class App:
     # static attributes
 
@@ -80,8 +88,16 @@ class App:
         self.mainWindow.scoreChanged.connect(self.CBscoreChanged)
 
         self.mainWindow.scoreSelectionChanged.connect(self.CBscoreSelectionChanged)
+        
+        self.mainWindow.editBlock.edit.lightEdit.light.exposure.valueChanged.connect(self.CBexposureChanged)
+        # self.mainWindow.editBlock.edit.lightEdit.light.contrast.valueChanged.connect(self.CBcontrastChanged)
+        # self.mainWindow.editBlock.edit.lightEdit.light.curve.valueChanged.connect(self.CBcurveChanged)
+
 
         self.mainWindow.setPrefs()
+
+        # Initialize exposure processing
+        self.exposureProcessor = exposure()
 
     # methods
     # -----------------------------------------------------------------
@@ -222,3 +238,29 @@ class App:
         self.selectionMap.selectByScore(imageScores, selectedScores)
         self.update()
 # ------------------------------------------------------------------------------------------
+    def CBexposureChanged(self, value: float) -> None:
+        if debug: print(f'Exposure changed: {value}')
+
+        # If an image is currently selected
+        if self.selectedImageIdx is not None:
+            # Get the global index of the selected image
+            gIdx = self.selectionMap.selectedlIndexToGlobalIndex(self.selectedImageIdx)
+            if gIdx is not None:
+                # Get the image filename
+                imageFilename = self.imagesManagement.getImagesFilesnames()[gIdx]
+                # Get the image data
+                image = self.imagesManagement.getImage(imageFilename)
+
+                # Process the image with the new exposure value
+                processed_image = self.exposureProcessor.compute(image, EV=value)
+
+                # Update the editor with the processed image
+                self.mainWindow.setEditorImage(processed_image)
+
+    # def CBcontrastChanged(self, value):
+    #     if debug: print(f'Contrast changed: {value}')
+    #     # Add code to handle contrast change
+
+    # def CBcurveChanged(self, value):
+    #     if debug: print(f'Curve changed: {value}')
+    #     # Add code to handle curve change

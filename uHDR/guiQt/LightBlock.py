@@ -32,29 +32,29 @@ from guiQt.MemoGroup import MemoGroup
 class LightBlock(QFrame):
     # class attributes
     ## signal
+    exposureChanged: pyqtSignal = pyqtSignal(float)
+    # contrastChanged: pyqtSignal = pyqtSignal(float)
+    # curveChanged: pyqtSignal = pyqtSignal(list)
 
     # constructor
-    def __init__(self : Self) -> None:
+    def __init__(self: Self) -> None:
         super().__init__()
         self.setFrameShape(QFrame.Shape.StyledPanel)
 
         # attributes
-        self.active : bool = True
+        self.active: bool = True
 
         # layout and widgets
-        self.topLayout : QVBoxLayout = QVBoxLayout()
+        self.topLayout: QVBoxLayout = QVBoxLayout()
         self.setLayout(self.topLayout)
 
-        self.exposure : AdvanceSlider =AdvanceSlider('exposure',0.0,(-30,+30),(-3.0,+3.0),10)
-        self.contrast :  Contrast =Contrast()
-        self.curve :  CurveWidget =CurveWidget()
-        #self.memory : MemoGroup = MemoGroup()
+        self.exposure: AdvanceSlider = AdvanceSlider('exposure', 0.0, (-30, +30), (-3.0, +3.0), 10)
+        self.contrast: Contrast = Contrast()
+        self.curve: CurveWidget = CurveWidget()
 
-        ## add to layout
+        # add to layout
         self.topLayout.addWidget(self.exposure)
         self.topLayout.addWidget(self.contrast)
         self.topLayout.addWidget(self.curve)
-        #self.topLayout.addWidget(self.memory)
-# ------------------------------------------------------------------------------------------
 
-
+        self.exposure.valueChanged.connect(self.exposureChanged)

@@ -30,23 +30,31 @@ from guiQt.ColorBlockScroll import ColorBlockScroll
 class Editor(QTabWidget):
     # class attributes
     ## signal
-
+    exposureChanged: pyqtSignal = pyqtSignal(float)
+    
     # constructor
-    def __init__(self:Self) -> None:
+    def __init__(self: Self) -> None:
         super().__init__()
 
         # attributes
-        self.lightEdit : LightBlockScroll = LightBlockScroll() 
-        self.nbColorEditor : int = 5       
-        self.colorEdits : list[ColorBlockScroll] = []
-        for i in range(self.nbColorEditor): self.colorEdits.append(ColorBlockScroll())
+        self.lightEdit: LightBlockScroll = LightBlockScroll()
+        self.nbColorEditor: int = 5
+        self.colorEdits: list[ColorBlockScroll] = []
+        for i in range(self.nbColorEditor):
+            self.colorEdits.append(ColorBlockScroll())
 
-        # QTabWidget settup
+        # QTabWidget setup
         self.setTabPosition(QTabWidget.TabPosition.East)
         self.setMovable(True)
 
         # add widgets
-        self.addTab(self.lightEdit,"Light")
-        for i in range(self.nbColorEditor): self.addTab(self.colorEdits[i],"Color "+str(i))
+        self.addTab(self.lightEdit, "Light")
+        for i in range(self.nbColorEditor):
+            self.addTab(self.colorEdits[i], "Color " + str(i))
 
+        self.lightEdit.light.exposure.valueChanged.connect(self.CBexposureChanged)
+       
         
+    def CBexposureChanged(self, value):
+        print(f'Editor exposure changed: {value}')
+        self.parent().exposureChanged.emit(value)

@@ -33,6 +33,7 @@ from guiQt.ImageWidget import ImageWidget
 class EditorBlock(QSplitter):
     # class attributes
     ## signal
+    exposureChanged: pyqtSignal = pyqtSignal(float)
 
     # constructor
     def __init__(self:Self) -> None:
