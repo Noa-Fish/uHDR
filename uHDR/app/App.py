@@ -96,10 +96,10 @@ class App:
         self.mainWindow.scoreChanged.connect(self.CBscoreChanged)
 
         self.mainWindow.scoreSelectionChanged.connect(self.CBscoreSelectionChanged)
-        
+        self.mainWindow.editBlock.edit.lightEdit.light.contrast.scalingSliderChanged.connect(self.CBcontrastscalingChanged)
         self.mainWindow.editBlock.edit.lightEdit.light.exposure.valueChanged.connect(self.CBexposureChanged)
         self.mainWindow.editBlock.edit.lightEdit.light.saturation.valueChanged.connect(self.CBsaturationChanged)
-        self.mainWindow.editBlock.edit.lightEdit.light.curve.curveChanged.connect(self.CBcurveChanged)  # Ajout du callback
+        self.mainWindow.editBlock.edit.lightEdit.light.curve.curveChanged.connect(self.CBcurveChanged) 
 
         self.mainWindow.setPrefs()
 
@@ -377,3 +377,41 @@ class App:
         else:
             print(f"Unexpected processed image type: {type(processed_image)}")
 # ------------------------------------------------------------------------------------------
+    def CBcontrastscalingChanged(self, value):
+        if self.selectedImageIdx is None:
+            return
+
+        imageName = self.selectionMap.selectedIndexToImageName(self.selectedImageIdx)
+
+        if not imageName:
+            return
+
+        # Si l'image originale n'a pas encore été copiée, faites-le maintenant
+        if self.original_image is None:
+            img = self.imagesManagement.getImage(imageName)
+
+            # Convertir en hdrCore.image.Image si nécessaire
+            if not isinstance(img, image.Image):
+                img = image.Image(
+                    self.imagesManagement.imagePath,
+                    imageName,
+                    img,
+                    image.imageType.SDR,
+                    False,
+                    image.ColorSpace.sRGB()
+                )
+            self.original_image = img
+
+        # Créer une copie de l'image originale
+        img_copy = copy.deepcopy(self.original_image)
+
+        saturation_processor = processing.contrast()
+        processed_image = saturation_processor.compute(img_copy, contrast=value)
+
+        if isinstance(processed_image, image.Image):
+            print(f"Processed image type is correct")
+            self.imagesManagement.images[imageName] = processed_image.colorData
+            self.mainWindow.setEditorImage(processed_image.colorData)
+        else:
+            print(f"Unexpected processed image type: {type(processed_image)}")
+            
