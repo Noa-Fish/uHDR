@@ -130,8 +130,7 @@ class App:
         """callback: called when directory is selected."""
 
         # ------------- DEBUG -------------
-        if debug : 
-            print(f'App.CBdirSelected({path})')
+        print(f'App.CBdirSelected({path})')
         # ------------- ------ -------------  
 
         self.imagesManagement.setDirectory(path)
