@@ -655,58 +655,59 @@ class Ycurve(Processing):
 # -----------------------------------------------------------------------------
 class saturation(Processing):
     """
-    TODO - Documentation de la classe saturation
+    Classe de traitement de la saturation
     """
     
-    def compute(self,img,**kwargs):
-        """saturation operator
+    def compute(self, img, **kwargs):
+        """Opérateur de saturation
 
         Args:
-            img (hdrCore.image.Image,Required):  input image
-            kwargs (dict, Optionnal) : parameters
+            img (hdrCore.image.Image, Required): image d'entrée
+            kwargs (dict, Optionnal): paramètres
                 'saturation': float
                 'method': str
-                    'method' parameter must be gamma 
-                default value: {'saturation': 0.0, 'method': 'gamma'}
+                    le paramètre 'method' doit être 'gamma'
+                valeur par défaut: {'saturation': 0.0, 'method': 'gamma'}
                 
         Returns:
-            (hdrCore.image.Image): output image
-        """ 
-        start=timer()
-        defaultValue= {'saturation': 0.0, 'method': 'gamma'}
+            (hdrCore.image.Image): image de sortie
+        """
+        start = timer()
+        defaultValue = {'saturation': 0.0, 'method': 'gamma'}
 
-        if not kwargs: kwargs = defaultValue  # default value 
+        if not kwargs:
+            kwargs = defaultValue  # valeur par défaut
 
-
-        # results image
+        # résultat image
         res = copy.deepcopy(img)
 
-        value = kwargs["saturation"]
+        value = kwargs.get("saturation", defaultValue['saturation'])
+        print(f"Applying saturation: {value}")  # Journalisation
         if value != defaultValue['saturation']:
-
-            # go to Lab then Lch
-            if img.linear: 
+            # Conversion en Lab puis Lch
+            if img.linear:
                 colorLab = sRGB_to_Lab(res.colorData, apply_cctf_decoding=False)
             else:
                 colorLab = sRGB_to_Lab(res.colorData, apply_cctf_decoding=True)
             colorLCH = colour.Lab_to_LCHab(colorLab)
 
-            # saturation in Lch (chroma as saturation)
-            gamma = 1/((value/25)+1) if value >= 0 else (-value/25)+1
-            colorLCH[:,:,1] =np.power(colorLCH[:,:,1]/100, gamma)*100
+            # saturation en Lch (chroma en tant que saturation)
+            if value >= 0:
+                gamma = 1 + value / 100
+            else:
+                gamma = 1 / (1 - value / 100)
+            
+            colorLCH[:, :, 1] = np.clip(colorLCH[:, :, 1] * gamma, 0, 100)
+            print(f"colorLCH after saturation: {colorLCH}")  # Journalisation
 
-
-            #colorRGB_sat = Lab_to_sRGB(colour.LCHab_to_Lab(colorLCH), apply_cctf_encoding=True)
-            #res.colorData = colorRGB_sat
-            #res.linear = False
-            res.colorData = colorLCH
+            # Conversion inverse en RGB
+            colorLab = colour.LCHab_to_Lab(colorLCH)
+            res.colorData = Lab_to_sRGB(colorLab, apply_cctf_encoding=True)
             res.linear = False
-            res.colorSpace = image.ColorSpace.build('Lch')
-
+            res.colorSpace = image.ColorSpace.build('sRGB')
+            print(f"res.colorData after conversion: {res.colorData}")  # Journalisation
 
         end = timer()
-        if pref.verbose: print(" [PROCESS-PROFILING] (",end - start,")>> saturation(",img.name,"):", kwargs)
-
         return res
 # -----------------------------------------------------------------------------
 # --- Class colorEditor ------------------------------------------------------

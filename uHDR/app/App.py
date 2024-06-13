@@ -1,9 +1,10 @@
+# App.py
 # uHDR: HDR image editing software
 #   Copyright (C) 2022  remi cozot 
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
+#    the Free Software Foundation, either version 3 of the License, ou
 #    (at your option) any later version.
 #
 #    This program is distributed in the hope that it will be useful,
@@ -39,7 +40,7 @@ import math
 import colour
 from timeit import default_timer as timer
 
-from hdrCore.processing import exposure
+from hdrCore.processing import exposure, saturation
 
 class App:
     # static attributes
@@ -93,14 +94,15 @@ class App:
         self.mainWindow.scoreSelectionChanged.connect(self.CBscoreSelectionChanged)
         
         self.mainWindow.editBlock.edit.lightEdit.light.exposure.valueChanged.connect(self.CBexposureChanged)
+        self.mainWindow.editBlock.edit.lightEdit.light.saturation.valueChanged.connect(self.CBsaturationChanged)
         # self.mainWindow.editBlock.edit.lightEdit.light.contrast.valueChanged.connect(self.CBcontrastChanged)
         # self.mainWindow.editBlock.edit.lightEdit.light.curve.valueChanged.connect(self.CBcurveChanged)
 
-
         self.mainWindow.setPrefs()
 
-        # Initialize exposure processing
+        # Initialize exposure and saturation processing
         self.exposureProcessor = exposure()
+        self.saturationProcessor = saturation()
 
     # methods
     # -----------------------------------------------------------------
@@ -148,7 +150,7 @@ class App:
     #### request image: zoom or page changed
     #### -----------------------------------------------------------------
     def CBrequestImages(self: App, minIdx: int , maxIdx:int ) -> None:
-        """callback: called when images are requested (occurs when page or zoom level is changed)."""
+        """callback: called when images are requested (occurs when page ou zoom level is changed)."""
 
         imagesFilenames : list[str] = self.imagesManagement.getImagesFilesnames()
 
@@ -165,7 +167,6 @@ class App:
     def CBimageLoaded(self: App, filename: str):
         """"callback: called when requested image is loaded (asynchronous loading)."""
 
-
         image : ndarray = self.imagesManagement.images[filename]
         imageIdx = self.selectionMap.imageNameToSelectedIndex(filename)         
 
@@ -176,10 +177,9 @@ class App:
     #### -----------------------------------------------------------------
     def CBimageSelected(self: App, index):
 
-
         self.selectedImageIdx = index # index in selection
 
-        gIdx : int | None= self.selectionMap.selectedlIndexToGlobalIndex(index)# global index
+        gIdx : int | None = self.selectionMap.selectedlIndexToGlobalIndex(index) # global index
 
         if (gIdx != None):
 
@@ -208,7 +208,6 @@ class App:
     #### -----------------------------------------------------------------
     def CBtagChanged(self, key: tuple[str, str], value : bool) -> None:
 
-
         if self.selectedImageIdx != None:
             imageName : str|None = self.selectionMap.selectedIndexToImageName(self.selectedImageIdx)
             if debug : print(f'\t\t imageName:{imageName}')
@@ -218,18 +217,15 @@ class App:
     #### -----------------------------------------------------------------
     def CBscoreChanged(self, value : int) -> None:
 
-
         if self.selectedImageIdx != None:
             imageName : str|None = self.selectionMap.selectedIndexToImageName(self.selectedImageIdx)
 
             if imageName != None : self.imagesManagement.updateImageScore(imageName, value)
 
-
     ### score selection changed
     ### ------------------------------------------------------------------
     def CBscoreSelectionChanged(self: App, listSelectedScore : list[bool]) -> None:
         """called when selection changed."""
-
 
         # get {'image name': score}
         imageScores : dict[str, int] = self.imagesManagement.imageScore
@@ -276,6 +272,47 @@ class App:
         processed_image = exposure_processor.compute(img_copy, EV=value)
 
         if isinstance(processed_image, image.Image):
+            self.imagesManagement.images[imageName] = processed_image.colorData
+            self.mainWindow.setEditorImage(processed_image.colorData)
+        else:
+            print(f"Unexpected processed image type: {type(processed_image)}")
+
+    def CBsaturationChanged(self, value):
+        print(f"adjustSaturation called with value: {value}")
+        
+        if self.selectedImageIdx is None:
+            return
+        
+        imageName = self.selectionMap.selectedIndexToImageName(self.selectedImageIdx)
+        print(f"Selected image name: {imageName}")
+        
+        if not imageName:
+            return
+        
+        # Si l'image originale n'a pas encore été copiée, faites-le maintenant
+        if self.original_image is None:
+            img = self.imagesManagement.getImage(imageName)
+            
+            # Convertir en hdrCore.image.Image si nécessaire
+            if not isinstance(img, image.Image):
+                img = image.Image(
+                    self.imagesManagement.imagePath,
+                    imageName,
+                    img,
+                    image.imageType.SDR,
+                    False,
+                    image.ColorSpace.sRGB()
+                )
+            self.original_image = img
+        
+        # Créer une copie de l'image originale
+        img_copy = copy.deepcopy(self.original_image)
+
+        saturation_processor = processing.saturation()
+        processed_image = saturation_processor.compute(img_copy, saturation=value)
+
+        if isinstance(processed_image, image.Image):
+            print(f"Processed image type is correct")
             self.imagesManagement.images[imageName] = processed_image.colorData
             self.mainWindow.setEditorImage(processed_image.colorData)
         else:

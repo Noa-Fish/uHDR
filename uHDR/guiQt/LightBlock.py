@@ -1,3 +1,4 @@
+# LightBlock.py
 # uHDR: HDR image editing software
 #   Copyright (C) 2022  remi cozot 
 #
@@ -27,12 +28,13 @@ from guiQt.CurveWidget import CurveWidget
 from guiQt.MemoGroup import MemoGroup
 
 # ------------------------------------------------------------------------------------------
-# --- class ColorEditor (QFrame) ------------------------------------------------------
+# --- class LightBlock (QFrame) ------------------------------------------------------
 # ------------------------------------------------------------------------------------------
 class LightBlock(QFrame):
     # class attributes
     ## signal
     exposureChanged: pyqtSignal = pyqtSignal(float)
+    saturationChanged: pyqtSignal = pyqtSignal(float)
     # contrastChanged: pyqtSignal = pyqtSignal(float)
     # curveChanged: pyqtSignal = pyqtSignal(list)
 
@@ -49,12 +51,16 @@ class LightBlock(QFrame):
         self.setLayout(self.topLayout)
 
         self.exposure: AdvanceSlider = AdvanceSlider('exposure', 0.0, (-30, +30), (-3.0, +3.0), 10)
+        self.saturation: AdvanceSlider = AdvanceSlider('saturation', 0.0, (-100, +100), (-1.0, +1.0), 10)
         self.contrast: Contrast = Contrast()
         self.curve: CurveWidget = CurveWidget()
 
         # add to layout
         self.topLayout.addWidget(self.exposure)
+        self.topLayout.addWidget(self.saturation)
         self.topLayout.addWidget(self.contrast)
         self.topLayout.addWidget(self.curve)
 
         self.exposure.valueChanged.connect(self.exposureChanged)
+        self.saturation.valueChanged.connect(self.saturationChanged)
+
