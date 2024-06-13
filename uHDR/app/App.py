@@ -9,7 +9,7 @@
 #
 #    This program is distributed in the hope that it will be useful,
 #    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY ou FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #    GNU General Public License for more details.
 #
 # hdrCore project 2020-2022
@@ -40,7 +40,7 @@ import math
 import colour
 from timeit import default_timer as timer
 
-from hdrCore.processing import exposure, saturation, Ycurve, colorEditor
+from hdrCore.processing import exposure, saturation, Ycurve
 
 class App:
     # static attributes
@@ -60,7 +60,7 @@ class App:
         ## -----------------------------------------------------        
         
         ## image file management
-        self.original_images = {}  # Dictionnaire pour stocker les copies originales des images
+        self.original_image = None
         self.imagesManagement : ImageFiles = ImageFiles()
         self.imagesManagement.imageLoaded.connect(self.CBimageLoaded)
         self.imagesManagement.setPrefs()
@@ -101,19 +101,12 @@ class App:
         self.mainWindow.editBlock.edit.lightEdit.light.saturation.valueChanged.connect(self.CBsaturationChanged)
         self.mainWindow.editBlock.edit.lightEdit.light.curve.curveChanged.connect(self.CBcurveChanged)  # Ajout du callback
 
-        # Connect ColorEditorBlock signals
-        for colorEdit in self.mainWindow.editBlock.edit.colorEdits:
-            colorEdit.light.editor.valueChanged.connect(self.CBcolorEditorChanged)  # Ajout du callback
-        
-        self.mainWindow.editBlock.edit.lightEdit.light.contrast.scalingSliderChanged.connect(self.CBcontrastscalingChanged)
-
         self.mainWindow.setPrefs()
 
-        # Initialize exposure, saturation, Ycurve, and colorEditor processing
+        # Initialize exposure, saturation, and Ycurve processing
         self.exposureProcessor = exposure()
         self.saturationProcessor = saturation()
         self.curveProcessor = Ycurve()
-        self.colorEditorProcessor = colorEditor()
 
     # methods
     # -----------------------------------------------------------------
@@ -145,7 +138,8 @@ class App:
         """callback: called when directory is selected."""
 
         # ------------- DEBUG -------------
-        print(f'App.CBdirSelected({path})')
+        if debug : 
+            print(f'App.CBdirSelected({path})')
         # ------------- ------ -------------  
 
         self.imagesManagement.setDirectory(path)
@@ -186,20 +180,17 @@ class App:
     #### image selected
     #### -----------------------------------------------------------------
     def CBimageSelected(self: App, index):
+
         self.selectedImageIdx = index # index in selection
 
         gIdx : int | None = self.selectionMap.selectedlIndexToGlobalIndex(index) # global index
 
         if (gIdx != None):
-            imageName = self.imagesManagement.getImagesFilesnames()[gIdx]
-            image : ndarray = self.imagesManagement.getImage(imageName)
-            tags : Tags = self.imagesManagement.getImageTags(imageName)
-            exif : dict[str,str] = self.imagesManagement.getImageExif(imageName)
-            score : int = self.imagesManagement.getImageScore(imageName)
 
-            # Stocker l'image originale si elle n'est pas déjà stockée
-            if imageName not in self.original_images:
-                self.original_images[imageName] = copy.deepcopy(image)
+            image : ndarray = self.imagesManagement.getImage(self.imagesManagement.getImagesFilesnames()[gIdx])
+            tags : Tags = self.imagesManagement.getImageTags(self.imagesManagement.getImagesFilesnames()[gIdx])
+            exif : dict[str,str] = self.imagesManagement.getImageExif(self.imagesManagement.getImagesFilesnames()[gIdx])
+            score : int = self.imagesManagement.getImageScore(self.imagesManagement.getImagesFilesnames()[gIdx])
 
             self.mainWindow.setEditorImage(image)
 
@@ -249,6 +240,7 @@ class App:
         # send info to selectionMap
         self.selectionMap.selectByScore(imageScores, selectedScores)
         self.update()
+### exposure changed
 # ------------------------------------------------------------------------------------------
     def CBexposureChanged(self, value):
         print(f"adjustExposure called with value: {value}")
@@ -258,137 +250,6 @@ class App:
         
         imageName = self.selectionMap.selectedIndexToImageName(self.selectedImageIdx)
         print(f"Selected image name: {imageName}")
-        
-        if not imageName:
-            return
-        
-        # Utiliser l'image originale stockée
-        img = self.original_images.get(imageName)
-        if img is None:
-            img = self.imagesManagement.getImage(imageName)
-            self.original_images[imageName] = copy.deepcopy(img)
-        
-        # Créer une copie de l'image originale
-        img_copy = copy.deepcopy(img)
-
-        exposure_processor = processing.exposure()
-        processed_image = exposure_processor.compute(img_copy, EV=value)
-
-        if isinstance(processed_image, image.Image):
-            self.imagesManagement.images[imageName] = processed_image.colorData
-            self.mainWindow.setEditorImage(processed_image.colorData)
-        else:
-            print(f"Unexpected processed image type: {type(processed_image)}")
-
-    def CBsaturationChanged(self, value):
-        print(f"adjustSaturation called with value: {value}")
-        
-        if self.selectedImageIdx is None:
-            return
-        
-        imageName = self.selectionMap.selectedIndexToImageName(self.selectedImageIdx)
-        print(f"Selected image name: {imageName}")
-        
-        if not imageName:
-            return
-        
-        # Utiliser l'image originale stockée
-        img = self.original_images.get(imageName)
-        if img is None:
-            img = self.imagesManagement.getImage(imageName)
-            self.original_images[imageName] = copy.deepcopy(img)
-        
-        # Créer une copie de l'image originale
-        img_copy = copy.deepcopy(img)
-
-        saturation_processor = processing.saturation()
-        processed_image = saturation_processor.compute(img_copy, saturation=value)
-
-        if isinstance(processed_image, image.Image):
-            print(f"Processed image type is correct")
-            self.imagesManagement.images[imageName] = processed_image.colorData
-            self.mainWindow.setEditorImage(processed_image.colorData)
-        else:
-            print(f"Unexpected processed image type: {type(processed_image)}")
-
-    def CBcurveChanged(self, controlPoints):
-        print(f"adjustCurve called with controlPoints: {controlPoints}")
-        
-        if self.selectedImageIdx is None:
-            return
-        
-        imageName = self.selectionMap.selectedIndexToImageName(self.selectedImageIdx)
-        print(f"Selected image name: {imageName}")
-        
-        if not imageName:
-            return
-        
-        # Complétez les points de contrôle manquants avec des valeurs par défaut
-        full_control_points = {
-            'start': [0.0, 0.0],
-            'end': [200.0, 100.0],
-            'shadows': controlPoints.get('shadows', [10.0, 10.0]),
-            'blacks': controlPoints.get('blacks', [30.0, 30.0]),
-            'mediums': controlPoints.get('mediums', [50.0, 50.0]),
-            'whites': controlPoints.get('whites', [70.0, 70.0]),
-            'highlights': controlPoints.get('highlights', [90.0, 90.0])
-        }
-        
-        # Utiliser l'image originale stockée
-        img = self.original_images.get(imageName)
-        if img is None:
-            img = self.imagesManagement.getImage(imageName)
-            self.original_images[imageName] = copy.deepcopy(img)
-        
-        # Créer une copie de l'image originale
-        img_copy = copy.deepcopy(img)
-
-        curve_processor = processing.Ycurve()
-        processed_image = curve_processor.compute(img_copy, **full_control_points)
-
-        if isinstance(processed_image, image.Image):
-            print(f"Processed image type is correct")
-            self.imagesManagement.images[imageName] = processed_image.colorData
-            self.mainWindow.setEditorImage(processed_image.colorData)
-        else:
-            print(f"Unexpected processed image type: {type(processed_image)}")
-
-    def CBcolorEditorChanged(self, values):
-        print(f"adjustColorEditor called with values: {values}")
-        
-        if self.selectedImageIdx is None:
-            return
-        
-        imageName = self.selectionMap.selectedIndexToImageName(self.selectedImageIdx)
-        print(f"Selected image name: {imageName}")
-        
-        if not imageName:
-            return
-        
-        # Utiliser l'image originale stockée
-        img = self.original_images.get(imageName)
-        if img is None:
-            img = self.imagesManagement.getImage(imageName)
-            self.original_images[imageName] = copy.deepcopy(img)
-        
-        # Créer une copie de l'image originale
-        img_copy = copy.deepcopy(img)
-
-        color_editor_processor = processing.colorEditor()
-        processed_image = color_editor_processor.compute(img_copy, **values)
-
-        if isinstance(processed_image, image.Image):
-            print(f"Processed image type is correct")
-            self.imagesManagement.images[imageName] = processed_image.colorData
-            self.mainWindow.setEditorImage(processed_image.colorData)
-        else:
-            print(f"Unexpected processed image type: {type(processed_image)}")
-# ------------------------------------------------------------------------------------------
-    def CBcontrastscalingChanged(self, value):
-        if self.selectedImageIdx is None:
-            return
-        
-        imageName = self.selectionMap.selectedIndexToImageName(self.selectedImageIdx)
         
         if not imageName:
             return
@@ -412,8 +273,49 @@ class App:
         # Créer une copie de l'image originale
         img_copy = copy.deepcopy(self.original_image)
 
-        saturation_processor = processing.contrast()
-        processed_image = saturation_processor.compute(img_copy, contrast=value)
+        exposure_processor = processing.exposure()
+        processed_image = exposure_processor.compute(img_copy, EV=value)
+
+        if isinstance(processed_image, image.Image):
+            self.imagesManagement.images[imageName] = processed_image.colorData
+            self.mainWindow.setEditorImage(processed_image.colorData)
+        else:
+            print(f"Unexpected processed image type: {type(processed_image)}")
+### saturation changed
+# ------------------------------------------------------------------------------------------
+    def CBsaturationChanged(self, value):
+        print(f"adjustSaturation called with value: {value}")
+        
+        if self.selectedImageIdx is None:
+            return
+        
+        imageName = self.selectionMap.selectedIndexToImageName(self.selectedImageIdx)
+        print(f"Selected image name: {imageName}")
+        
+        if not imageName:
+            return
+        
+        # Si l'image originale n'a pas encore été copiée, faites-le maintenant
+        if self.original_image is None:
+            img = self.imagesManagement.getImage(imageName)
+            
+            # Convertir en hdrCore.image.Image si nécessaire
+            if not isinstance(img, image.Image):
+                img = image.Image(
+                    self.imagesManagement.imagePath,
+                    imageName,
+                    img,
+                    image.imageType.SDR,
+                    False,
+                    image.ColorSpace.sRGB()
+                )
+            self.original_image = img
+        
+        # Créer une copie de l'image originale
+        img_copy = copy.deepcopy(self.original_image)
+
+        saturation_processor = processing.saturation()
+        processed_image = saturation_processor.compute(img_copy, saturation=value)
 
         if isinstance(processed_image, image.Image):
             print(f"Processed image type is correct")
@@ -421,3 +323,57 @@ class App:
             self.mainWindow.setEditorImage(processed_image.colorData)
         else:
             print(f"Unexpected processed image type: {type(processed_image)}")
+### curve & data changed
+# ------------------------------------------------------------------------------------------
+    def CBcurveChanged(self, controlPoints):
+        print(f"adjustCurve called with controlPoints: {controlPoints}")
+        
+        if self.selectedImageIdx is None:
+            return
+        
+        imageName = self.selectionMap.selectedIndexToImageName(self.selectedImageIdx)
+        print(f"Selected image name: {imageName}")
+        
+        if not imageName:
+            return
+        
+        # Complétez les points de contrôle manquants avec des valeurs par défaut
+        full_control_points = {
+            'start': [0.0, 0.0],
+            'end': [200.0, 100.0],
+            'shadows': controlPoints.get('shadows', [10.0, 10.0]),
+            'blacks': controlPoints.get('blacks', [30.0, 30.0]),
+            'mediums': controlPoints.get('mediums', [50.0, 50.0]),
+            'whites': controlPoints.get('whites', [70.0, 70.0]),
+            'highlights': controlPoints.get('highlights', [90.0, 90.0])
+        }
+        
+        # Si l'image originale n'a pas encore été copiée, faites-le maintenant
+        if self.original_image is None:
+            img = self.imagesManagement.getImage(imageName)
+            
+            # Convertir en hdrCore.image.Image si nécessaire
+            if not isinstance(img, image.Image):
+                img = image.Image(
+                    self.imagesManagement.imagePath,
+                    imageName,
+                    img,
+                    image.imageType.SDR,
+                    False,
+                    image.ColorSpace.sRGB()
+                )
+            self.original_image = img
+        
+        # Créer une copie de l'image originale
+        img_copy = copy.deepcopy(self.original_image)
+
+        curve_processor = processing.Ycurve()
+        processed_image = curve_processor.compute(img_copy, **full_control_points)
+
+        if isinstance(processed_image, image.Image):
+            print(f"Processed image type is correct")
+            self.imagesManagement.images[imageName] = processed_image.colorData
+            self.mainWindow.setEditorImage(processed_image.colorData)
+        else:
+            print(f"Unexpected processed image type: {type(processed_image)}")
+# ------------------------------------------------------------------------------------------
