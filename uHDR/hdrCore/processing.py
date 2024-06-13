@@ -566,16 +566,16 @@ class resize(Processing):
 # -----------------------------------------------------------------------------
 class Ycurve(Processing):
     """
-    TODO - Documentation de la classe Ycurve
+    Classe de traitement de Ycurve
     """
     
-    def compute(self,img,**kwargs):
+    def compute(self, img, **kwargs):
         """
         compute: compute Ycurve according to parameters.
 
         Args:
             img (hdrCore.image.Image, Required): image
-            kwargs (dict,Optionnal): parameters gieven as dict
+            kwargs (dict, Optionnal): parameters given as dict
                 
         Returns:
             (hdrCore.image.Image, Required): image
@@ -590,7 +590,8 @@ class Ycurve(Processing):
                                 'highlights': [90,90], 
                                 'end': [100,100]}
 
-        if not kwargs: kwargs = defaultControlPoints  # default value 
+        if not kwargs:
+            kwargs = defaultControlPoints  # default value 
 
 
         # results image
@@ -601,28 +602,25 @@ class Ycurve(Processing):
             if img.linear: 
                 if pref.computation == 'python':
                     start = timer()
-                    res.colorData =     colour.cctf_encoding(res.colorData, function='sRGB') # encode to prime
+                    res.colorData =     colour.cctf_encoding(res.colorData, function='sRGB')
                     res.linear =        False
 
                 elif pref.computation == 'numba':
                     start = timer()
-                    res.colorData =     numbafun.numba_cctf_sRGB_encoding(res.colorData) # encode to prime
+                    res.colorData =     numbafun.numba_cctf_sRGB_encoding(res.colorData)
                     res.linear =        False
 
                 elif pref.computation == 'cuda':
                     start = timer()
-                    res.colorData =     numbafun.cuda_cctf_sRGB_encoding(res.colorData) # encode to prime
+                    res.colorData =     numbafun.cuda_cctf_sRGB_encoding(res.colorData)
                     res.linear =        False
 
                 dt = timer() - start
 
             colorDataY =    sRGB_to_XYZ(res.colorData, apply_cctf_decoding=False)[:,:,1] 
-            # change for multi-threading computation
-            # Ymax =          np.amax(colorDataY)*100
-            # extendedEnd =   [Ymax, kwargs['end'][1]]
             extendedEnd =   [200, kwargs['end'][1]]
 
-            # create curve adn get y-curve
+            # create curve and get y-curve
             curve =         BSpline.Curve()
             curve.degree =  2
             points =        None
@@ -646,8 +644,9 @@ class Ycurve(Processing):
                 res.colorData[:,:,1] = res.colorData[:,:,1]*colorDataFY/colorDataY
                 res.colorData[:,:,2] = res.colorData[:,:,2]*colorDataFY/colorDataY
         
-        end = timer()        
-        if pref.verbose: print(" [PROCESS-PROFILING] (",end - start,")>> Ycurve(",img.name,"):", kwargs)
+        end = timer()
+        if hasattr(pref, 'verbose') and pref.verbose:
+            print(" [PROCESS-PROFILING] (", end - start, ")>> Ycurve(", img.name, "):", kwargs)
 
         return res
 # -----------------------------------------------------------------------------
@@ -658,56 +657,43 @@ class saturation(Processing):
     Classe de traitement de la saturation
     """
     
-    def compute(self, img, **kwargs):
-        """Opérateur de saturation
-
+    def compute(self,img,**kwargs):
+        """saturation operator
         Args:
-            img (hdrCore.image.Image, Required): image d'entrée
-            kwargs (dict, Optionnal): paramètres
+            img (hdrCore.image.Image,Required):  input image
+            kwargs (dict, Optionnal) : parameters
                 'saturation': float
                 'method': str
-                    le paramètre 'method' doit être 'gamma'
-                valeur par défaut: {'saturation': 0.0, 'method': 'gamma'}
+                    'method' parameter must be gamma 
+                default value: {'saturation': 0.0, 'method': 'gamma'}
                 
         Returns:
-            (hdrCore.image.Image): image de sortie
-        """
-        start = timer()
-        defaultValue = {'saturation': 0.0, 'method': 'gamma'}
-
-        if not kwargs:
-            kwargs = defaultValue  # valeur par défaut
-
-        # résultat image
+            (hdrCore.image.Image): output image
+        """ 
+        start=timer()
+        defaultValue= {'saturation': 0.0, 'method': 'gamma'}
+        if not kwargs: kwargs = defaultValue  # default value 
+        # results image
         res = copy.deepcopy(img)
-
-        value = kwargs.get("saturation", defaultValue['saturation'])
-        print(f"Applying saturation: {value}")  # Journalisation
+        value = kwargs["saturation"]
         if value != defaultValue['saturation']:
-            # Conversion en Lab puis Lch
-            if img.linear:
+            # go to Lab then Lch
+            if img.linear: 
                 colorLab = sRGB_to_Lab(res.colorData, apply_cctf_decoding=False)
             else:
                 colorLab = sRGB_to_Lab(res.colorData, apply_cctf_decoding=True)
             colorLCH = colour.Lab_to_LCHab(colorLab)
-
-            # saturation en Lch (chroma en tant que saturation)
-            if value >= 0:
-                gamma = 1 + value / 100
-            else:
-                gamma = 1 / (1 - value / 100)
-            
-            colorLCH[:, :, 1] = np.clip(colorLCH[:, :, 1] * gamma, 0, 100)
-            print(f"colorLCH after saturation: {colorLCH}")  # Journalisation
-
-            # Conversion inverse en RGB
-            colorLab = colour.LCHab_to_Lab(colorLCH)
-            res.colorData = Lab_to_sRGB(colorLab, apply_cctf_encoding=True)
+            # saturation in Lch (chroma as saturation)
+            gamma = 1/((value/25)+1) if value >= 0 else (-value/25)+1
+            colorLCH[:,:,1] =np.power(colorLCH[:,:,1]/100, gamma)*100
+            #colorRGB_sat = Lab_to_sRGB(colour.LCHab_to_Lab(colorLCH), apply_cctf_encoding=True)
+            #res.colorData = colorRGB_sat
+            #res.linear = False
+            res.colorData = colorLCH
             res.linear = False
-            res.colorSpace = image.ColorSpace.build('sRGB')
-            print(f"res.colorData after conversion: {res.colorData}")  # Journalisation
-
+            res.colorSpace = image.ColorSpace.build('Lch')
         end = timer()
+        print(" [PROCESS-PROFILING] (",end - start,")>> saturation(",img.name,"):", kwargs)
         return res
 # -----------------------------------------------------------------------------
 # --- Class colorEditor ------------------------------------------------------

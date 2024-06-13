@@ -51,7 +51,7 @@ class LightBlock(QFrame):
         self.setLayout(self.topLayout)
 
         self.exposure: AdvanceSlider = AdvanceSlider('exposure', 0.0, (-30, +30), (-3.0, +3.0), 10)
-        self.saturation: AdvanceSlider = AdvanceSlider('saturation', 0.0, (-100, +100), (-1.0, +1.0), 10)
+        self.saturation: AdvanceSlider = AdvanceSlider("saturation", 0, (-100,+100), None , 1)
         self.contrast: Contrast = Contrast()
         self.curve: CurveWidget = CurveWidget()
 

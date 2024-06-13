@@ -1,3 +1,4 @@
+# ColorEditor.py
 # uHDR: HDR image editing software
 #   Copyright (C) 2022  remi cozot 
 #
@@ -17,10 +18,9 @@
 # import
 # ------------------------------------------------------------------------------------------
 from typing_extensions import Self
-from PyQt6.QtWidgets import QFrame, QHBoxLayout, QVBoxLayout,QPushButton, QLabel, QLineEdit, QSlider, QCheckBox
-from PyQt6.QtGui import QDoubleValidator, QIntValidator 
-from PyQt6.QtCore import Qt, pyqtSignal, QLocale
+from PyQt6.QtWidgets import QFrame, QVBoxLayout
 from guiQt.AdvanceSliderLine import AdvanceSliderLine
+from PyQt6.QtCore import pyqtSignal
 
 # ------------------------------------------------------------------------------------------
 # --- class ColorEditor (QFrame) ------------------------------------------------------
@@ -28,6 +28,7 @@ from guiQt.AdvanceSliderLine import AdvanceSliderLine
 class ColorEditor(QFrame):
     # class attributes
     ## signal
+    valueChanged = pyqtSignal(dict)
 
     # constructor
     def __init__(self : Self) -> None:
@@ -51,6 +52,18 @@ class ColorEditor(QFrame):
         self.topLayout.addWidget(self.exposure)
         self.topLayout.addWidget(self.contrast)
 
-# ------------------------------------------------------------------------------------------
-        
+        # connect signals
+        self.hueShift.valueChanged.connect(lambda value: self.emitValueChanged())
+        self.saturation.valueChanged.connect(lambda value: self.emitValueChanged())
+        self.exposure.valueChanged.connect(lambda value: self.emitValueChanged())
+        self.contrast.valueChanged.connect(lambda value: self.emitValueChanged())
 
+    def emitValueChanged(self):
+        values = {
+            'hue': self.hueShift.tovalue(),
+            'saturation': self.saturation.value(),
+            'exposure': self.exposure.value(),
+            'contrast': self.contrast.value()
+        }
+        self.valueChanged.emit(values)
+# ------------------------------------------------------------------------------------------
