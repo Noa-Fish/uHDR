@@ -26,6 +26,8 @@ from guiQt.MainWindow import MainWindow
 from app.ImageFiles import ImageFiles
 from app.Tags import Tags
 from app.SelectionMap import SelectionMap
+from hdrCore import processing
+from hdrCore import image
 
 # ------------------------------------------------------------------------------------------
 # --- class App ----------------------------------------------------------------------------
@@ -53,6 +55,7 @@ class App:
         ## -----------------------------------------------------        
         
         ## image file management
+        self.original_image = None
         self.imagesManagement : ImageFiles = ImageFiles()
         self.imagesManagement.imageLoaded.connect(self.CBimageLoaded)
         self.imagesManagement.setPrefs()
@@ -238,29 +241,42 @@ class App:
         self.selectionMap.selectByScore(imageScores, selectedScores)
         self.update()
 # ------------------------------------------------------------------------------------------
-    def CBexposureChanged(self, value: float) -> None:
-        if debug: print(f'Exposure changed: {value}')
+    def CBexposureChanged(self, value):
+        print(f"adjustExposure called with value: {value}")
+        
+        if self.selectedImageIdx is None:
+            return
+        
+        imageName = self.selectionMap.selectedIndexToImageName(self.selectedImageIdx)
+        print(f"Selected image name: {imageName}")
+        
+        if not imageName:
+            return
+        
+        # Si l'image originale n'a pas encore été copiée, faites-le maintenant
+        if self.original_image is None:
+            img = self.imagesManagement.getImage(imageName)
+            
+            # Convertir en hdrCore.image.Image si nécessaire
+            if not isinstance(img, image.Image):
+                img = image.Image(
+                    self.imagesManagement.imagePath,
+                    imageName,
+                    img,
+                    image.imageType.SDR,
+                    False,
+                    image.ColorSpace.sRGB()
+                )
+            self.original_image = img
+        
+        # Créer une copie de l'image originale
+        img_copy = copy.deepcopy(self.original_image)
 
-        # If an image is currently selected
-        if self.selectedImageIdx is not None:
-            # Get the global index of the selected image
-            gIdx = self.selectionMap.selectedlIndexToGlobalIndex(self.selectedImageIdx)
-            if gIdx is not None:
-                # Get the image filename
-                imageFilename = self.imagesManagement.getImagesFilesnames()[gIdx]
-                # Get the image data
-                image = self.imagesManagement.getImage(imageFilename)
+        exposure_processor = processing.exposure()
+        processed_image = exposure_processor.compute(img_copy, EV=value)
 
-                # Process the image with the new exposure value
-                processed_image = self.exposureProcessor.compute(image, EV=value)
-
-                # Update the editor with the processed image
-                self.mainWindow.setEditorImage(processed_image)
-
-    # def CBcontrastChanged(self, value):
-    #     if debug: print(f'Contrast changed: {value}')
-    #     # Add code to handle contrast change
-
-    # def CBcurveChanged(self, value):
-    #     if debug: print(f'Curve changed: {value}')
-    #     # Add code to handle curve change
+        if isinstance(processed_image, image.Image):
+            self.imagesManagement.images[imageName] = processed_image.colorData
+            self.mainWindow.setEditorImage(processed_image.colorData)
+        else:
+            print(f"Unexpected processed image type: {type(processed_image)}")

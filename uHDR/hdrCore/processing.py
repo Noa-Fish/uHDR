@@ -34,8 +34,7 @@ from geomdl import BSpline
 from geomdl import utilities
 from . import image, utils, aesthetics
 # RCZT 2023
-from . import image, utils, numbafun, aesthetics
-import guiQt.controller as gc
+#from hdrCore import image, utils, numbafun, aesthetics
 import preferences.Prefs as pref
 from timeit import default_timer as timer
 
@@ -259,28 +258,28 @@ class exposure(Processing):
         if EV != defaultEV:
             # exposure is done in linear RGB
             if not res.linear:
-                
-                if pref.computation == 'python':
+                computation = "python"
+                if computation == 'python':
                     start = timer()
-                    res.colorData =     colour.cctf_decoding(res.colorData, function='sRGB')
-                    res.linear =        True
+                    res.colorData = colour.cctf_decoding(res.colorData, function='sRGB')
+                    res.linear = True
 
-                elif pref.computation == 'numba':
+                elif computation == 'numba':
                     start = timer()
                     res.colorData =     numbafun.numba_cctf_sRGB_decoding(res.colorData) # encode to prime
                     res.linear =        True
 
-                elif pref.computation == 'cuda':
+                elif computation == 'cuda':
                     start = timer()
                     res.colorData =     numbafun.cuda_cctf_sRGB_decoding(res.colorData) # encode to prime
                     res.linear =        True
 
                 dt = timer() - start
 
-            res.colorData =     res.colorData*math.pow(2,EV)
+            res.colorData = res.colorData * math.pow(2, EV)
 
         end = timer()
-        if pref.verbose: print (" [PROCESS-PROFILING](",end - start,") >> exposure(",img.name,"):", kwargs)
+        # if pref.verbose: print (" [PROCESS-PROFILING](",end - start,") >> exposure(",img.name,"):", kwargs)
 
         return res
 
