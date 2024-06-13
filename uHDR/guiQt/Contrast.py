@@ -30,6 +30,8 @@ from core import colourData, colourSpace
 
 # ------------------------------------------------------------------------------------------
 class Contrast(QFrame):
+    #signal
+    scalingSliderChanged: pyqtSignal = pyqtSignal(float)
     # class attributes
 
     # constructor
@@ -94,6 +96,7 @@ class Contrast(QFrame):
 
         ## calbacks
         self.lightnessSelector.valuesChanged.connect(self.CBlightnessSelctionChanged)
+        self.scalingSlider.valueChanged.connect(self.onScalingChanged)
 
     # methods
     ## callbacks
@@ -104,3 +107,8 @@ class Contrast(QFrame):
     # update view
     def updateView(self: Self) -> None:
         pass
+    
+    def onScalingChanged(self, name: str, value: float) -> None:
+        print(f"Scaling value changed: {value}")
+        # Émettre le signal scalingChanged avec la nouvelle valeur
+        self.scalingSliderChanged.emit(value)
