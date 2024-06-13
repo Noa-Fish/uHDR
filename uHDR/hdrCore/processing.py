@@ -369,26 +369,25 @@ class contrast(Processing):
         else:                       contrastValue = defaultContrast
 
         res = copy.deepcopy(img)
-
         if contrastValue != defaultContrast:
             # contrast scaling is computed in prime colorspace
-            if img.linear: 
-                if pref.computation == 'python':
-                    start = timer()
-                    res.colorData =     colour.cctf_encoding(res.colorData, function='sRGB') # encode to prime
-                    res.linear =        False
+            computation = 'python'
+            if computation == 'python':
+                start = timer()
+                res.colorData =     colour.cctf_encoding(res.colorData, function='sRGB') # encode to prime
+                res.linear =        False
 
-                elif pref.computation == 'numba':
-                    start = timer()
-                    res.colorData =     numbafun.numba_cctf_sRGB_encoding(res.colorData) # encode to prime
-                    res.linear =        False
+            elif computation == 'numba':
+                start = timer()
+                res.colorData =     numbafun.numba_cctf_sRGB_encoding(res.colorData) # encode to prime
+                res.linear =        False
 
-                elif pref.computation == 'cuda':
-                    start = timer()
-                    res.colorData =     numbafun.cuda_cctf_sRGB_encoding(res.colorData) # encode to prime
-                    res.linear =        False
+            elif computation == 'cuda':
+                start = timer()
+                res.colorData =     numbafun.cuda_cctf_sRGB_encoding(res.colorData) # encode to prime
+                res.linear =        False
 
-                dt = timer() - start
+            dt = timer() - start
 
             # scaling contrast
             contrastValue = contrastValue/100 
@@ -402,7 +401,6 @@ class contrast(Processing):
             res.colorData = scalingFactor*(res.colorData-0.5)+0.5
         
         end=timer()    
-        if pref.verbose: print(" [PROCESS-PROFILING] (",end-start,")>> contrast(",img.name,"):", kwargs)
 
         return res
 # -----------------------------------------------------------------------------

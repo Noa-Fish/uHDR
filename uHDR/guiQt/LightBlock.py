@@ -35,8 +35,6 @@ class LightBlock(QFrame):
     ## signal
     exposureChanged: pyqtSignal = pyqtSignal(float)
     saturationChanged: pyqtSignal = pyqtSignal(float)
-    # contrastChanged: pyqtSignal = pyqtSignal(float)
-    # curveChanged: pyqtSignal = pyqtSignal(list)
 
     # constructor
     def __init__(self: Self) -> None:
