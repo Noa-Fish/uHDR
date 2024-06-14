@@ -87,6 +87,10 @@ class App:
         self.mainWindow.showMaximized()
         self.mainWindow.show()
 
+        self.defaultExposureValue = 0
+        self.currentExposureValue = 0
+        self.exposureActive = True
+        
         ## callbacks
         self.mainWindow.dirSelected.connect(self.CBdirSelected)
         self.mainWindow.requestImages.connect(self.CBrequestImages)
@@ -97,7 +101,11 @@ class App:
 
         self.mainWindow.scoreSelectionChanged.connect(self.CBscoreSelectionChanged)
         self.mainWindow.editBlock.edit.lightEdit.light.contrast.scalingSliderChanged.connect(self.CBcontrastscalingChanged)
+        
+        self.mainWindow.editBlock.edit.lightEdit.light.exposure.activeToggled.connect(self.CBexposureactiveChanged)
+        self.mainWindow.editBlock.edit.lightEdit.light.exposure.autoClicked.connect(self.CBexposureautoChanged)
         self.mainWindow.editBlock.edit.lightEdit.light.exposure.valueChanged.connect(self.CBexposureChanged)
+        
         self.mainWindow.editBlock.edit.lightEdit.light.saturation.valueChanged.connect(self.CBsaturationChanged)
         self.mainWindow.editBlock.edit.lightEdit.light.curve.curveChanged.connect(self.CBcurveChanged) 
 
@@ -138,8 +146,7 @@ class App:
         """callback: called when directory is selected."""
 
         # ------------- DEBUG -------------
-        if debug : 
-            print(f'App.CBdirSelected({path})')
+        print(f'App.CBdirSelected({path})')
         # ------------- ------ -------------  
 
         self.imagesManagement.setDirectory(path)
@@ -243,44 +250,49 @@ class App:
 ### exposure changed
 # ------------------------------------------------------------------------------------------
     def CBexposureChanged(self, value):
-        print(f"adjustExposure called with value: {value}")
-        
-        if self.selectedImageIdx is None:
-            return
-        
-        imageName = self.selectionMap.selectedIndexToImageName(self.selectedImageIdx)
-        print(f"Selected image name: {imageName}")
-        
-        if not imageName:
-            return
-        
-        # Si l'image originale n'a pas encore été copiée, faites-le maintenant
-        if self.original_image is None:
-            img = self.imagesManagement.getImage(imageName)
+        print(f"adjustExposure called with value: {value} AND esxposureActive: {self.exposureActive}")
+        defaut = False
+        if self.exposureActive == False:
+            self.currentExposureValue = value
+        if self.exposureActive == False and value==0:
+            defaut = True
+        if defaut or self.exposureActive :
+            if self.selectedImageIdx is None:
+                return
             
-            # Convertir en hdrCore.image.Image si nécessaire
-            if not isinstance(img, image.Image):
-                img = image.Image(
-                    self.imagesManagement.imagePath,
-                    imageName,
-                    img,
-                    image.imageType.SDR,
-                    False,
-                    image.ColorSpace.sRGB()
-                )
-            self.original_image = img
-        
-        # Créer une copie de l'image originale
-        img_copy = copy.deepcopy(self.original_image)
+            imageName = self.selectionMap.selectedIndexToImageName(self.selectedImageIdx)
+            print(f"Selected image name: {imageName}")
+                
+            if not imageName:
+                return
+            
+            # Si l'image originale n'a pas encore été copiée, faites-le maintenant
+            if self.original_image is None:
+                img = self.imagesManagement.getImage(imageName)
+                
+                # Convertir en hdrCore.image.Image si nécessaire
+                if not isinstance(img, image.Image):
+                    img = image.Image(
+                        self.imagesManagement.imagePath,
+                        imageName,
+                        img,
+                        image.imageType.SDR,
+                        False,
+                        image.ColorSpace.sRGB()
+                    )
+                self.original_image = img
+            
+            # Créer une copie de l'image originale
+            img_copy = copy.deepcopy(self.original_image)
 
-        exposure_processor = processing.exposure()
-        processed_image = exposure_processor.compute(img_copy, EV=value)
+            exposure_processor = processing.exposure()
+            processed_image = exposure_processor.compute(img_copy, EV=value)
 
-        if isinstance(processed_image, image.Image):
-            self.imagesManagement.images[imageName] = processed_image.colorData
-            self.mainWindow.setEditorImage(processed_image.colorData)
-        else:
-            print(f"Unexpected processed image type: {type(processed_image)}")
+            if isinstance(processed_image, image.Image):
+                self.imagesManagement.images[imageName] = processed_image.colorData
+                self.mainWindow.setEditorImage(processed_image.colorData)
+            else:
+                print(f"Unexpected processed image type: {type(processed_image)}")
 ### saturation changed
 # ------------------------------------------------------------------------------------------
     def CBsaturationChanged(self, value):
@@ -415,3 +427,54 @@ class App:
         else:
             print(f"Unexpected processed image type: {type(processed_image)}")
             
+            
+    
+    def CBexposureautoChanged(self):
+        print(f"adjustExposureAuto clicked")
+        
+        # if self.selectedImageIdx is None:
+        #     return
+        
+        # imageName = self.selectionMap.selectedIndexToImageName(self.selectedImageIdx)
+        # print(f"Selected image name: {imageName}")
+        
+        # if not imageName:
+        #     return
+        
+        # # Si l'image originale n'a pas encore été copiée, faites-le maintenant
+        # if self.original_image is None:
+        #     img = self.imagesManagement.getImage(imageName)
+            
+        #     # Convertir en hdrCore.image.Image si nécessaire
+        #     if not isinstance(img, image.Image):
+        #         img = image.Image(
+        #             self.imagesManagement.imagePath,
+        #             imageName,
+        #             img,
+        #             image.imageType.SDR,
+        #             False,
+        #             image.ColorSpace.sRGB()
+        #         )
+        #     self.original_image = img
+        
+        # # Créer une copie de l'image originale
+        # img_copy = copy.deepcopy(self.original_image)
+
+        # exposure_processor = processing.exposure()
+        # processed_image = exposure_processor.auto(img_copy)
+
+        # if isinstance(processed_image, image.Image):
+        #     self.imagesManagement.images[imageName] = processed_image.colorData
+        #     self.mainWindow.setEditorImage(processed_image.colorData)
+        # else:
+        #     print(f"Unexpected processed image type: {type(processed_image)}")
+        pass
+    
+    def CBexposureactiveChanged(self, active):
+        self.exposureActive = active
+        if not active:
+            # Lorsque désactivé, utiliser la valeur par défaut
+            self.CBexposureChanged(self.defaultExposureValue)
+        else:
+            # Lorsque activé, utiliser la valeur actuelle
+            self.CBexposureChanged(self.currentExposureValue)
