@@ -1,6 +1,6 @@
 from __future__ import annotations
 # uHDR: HDR image editing software
-#   Copyright (C) 2022  remi cozot 
+#   Copyright (C) 2024  antoine bacquet et noa watel 
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -12,8 +12,9 @@ from __future__ import annotations
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #    GNU General Public License for more details.
 #
-# hdrCore project 2020-2022
-# author: remi.cozot@univ-littoral.fr
+# hdrCore project 2020-2024
+# author: bacquet antoine et watel noa
+
 
 # import
 # ------------------------------------------------------------------------------------------

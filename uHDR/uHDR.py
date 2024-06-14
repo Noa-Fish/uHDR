@@ -1,5 +1,5 @@
 # uHDR: HDR image editing software
-#   Copyright (C) 2022  remi cozot 
+#   Copyright (C) 2024  antoine bacquet et noa watel
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -11,8 +11,9 @@
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #    GNU General Public License for more details.
 #
-# hdrCore project 2020-2022
-# author: remi.cozot@univ-littoral.fr
+# hdrCore project 2020-2024
+# author: bacquet antoine et watel noa
+
 
 # import
 # ------------------------------------------------------------------------------------------
@@ -30,7 +31,7 @@ import sys
 if __name__ == '__main__':
     freeze_support()
     print("---------------------------------------------------------------------------------------")
-    print("--------------------------- uHDRv7 - July 2022 (C++ core) -----------------------------")
+    print("--------------------------- uHDRv7 - June 2024 (C++ core) -----------------------------")
     print("---------------------------------------------------------------------------------------")
     print("----                   High Dynamic Range image editing software                   ----")
     print("---- FEATURES:                                                                     ----")
@@ -39,9 +40,8 @@ if __name__ == '__main__':
     print("----     3. edit color segments: hue shift, exposure, contrast and saturation      ----")
     print("----     4. target many HDR displays: vesa HDR displays, HLG ...                   ----")                                                                            
     print("---------------------------------------------------------------------------------------")
-    print("---- author(s): Rémi Cozot, remi.cozot@univ-littoral.fr                            ----")
-    print("----            Rémi Synave, remi.synave@univ-littoral.fr                          ----")
-    print("----            Jing Zhang, jing.zhang@univ-littoral.fr                            ----")
+    print("---- author(s): Antoine Bacquet,                                                   ----")
+    print("----            Noa Watel,                                                         ----")
     print("---------------------------------------------------------------------------------------")
     print("---- date: uHDRv1:2019, uHDRv7: 2024                                               ----")
     print("---------------------------------------------------------------------------------------")

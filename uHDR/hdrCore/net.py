@@ -1,5 +1,5 @@
 # uHDR: HDR image editing software
-#   Copyright (C) 2021  remi cozot 
+#   Copyright (C) 2021  antoine bacquet et noa watel 
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -12,7 +12,8 @@
 #    GNU General Public License for more details.
 #
 # hdrCore project 2020
-# author: remi.cozot@univ-littoral.fr
+# author: bacquet antoine et watel noa
+
 
 # -----------------------------------------------------------------------------
 # --- Package hdrCore ---------------------------------------------------------
