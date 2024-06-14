@@ -274,11 +274,9 @@ class App:
             if not imageName:
                 return
             
-            # Si l'image originale n'a pas encore été copiée, faites-le maintenant
             if self.original_image is None:
                 img = self.imagesManagement.getImage(imageName)
                 
-                # Convertir en hdrCore.image.Image si nécessaire
                 if not isinstance(img, image.Image):
                     img = image.Image(
                         self.imagesManagement.imagePath,
@@ -290,7 +288,6 @@ class App:
                     )
                 self.original_image = img
             
-            # Créer une copie de l'image originale
             img_copy = copy.deepcopy(self.original_image)
 
             exposure_processor = processing.exposure()
@@ -315,7 +312,6 @@ class App:
         if not imageName:
             return
         
-        # Complétez les points de contrôle manquants avec des valeurs par défaut
         full_control_points = {
             'start': [0.0, 0.0],
             'end': [200.0, 100.0],
@@ -326,11 +322,9 @@ class App:
             'highlights': controlPoints.get('highlights', [90.0, 90.0])
         }
         
-        # Si l'image originale n'a pas encore été copiée, faites-le maintenant
         if self.original_image is None:
             img = self.imagesManagement.getImage(imageName)
             
-            # Convertir en hdrCore.image.Image si nécessaire
             if not isinstance(img, image.Image):
                 img = image.Image(
                     self.imagesManagement.imagePath,
@@ -342,7 +336,6 @@ class App:
                 )
             self.original_image = img
         
-        # Créer une copie de l'image originale
         img_copy = copy.deepcopy(self.original_image)
 
         curve_processor = processing.Ycurve()
@@ -364,11 +357,9 @@ class App:
         if not imageName:
             return
 
-        # Si l'image originale n'a pas encore été copiée, faites-le maintenant
         if self.original_image is None:
             img = self.imagesManagement.getImage(imageName)
 
-            # Convertir en hdrCore.image.Image si nécessaire
             if not isinstance(img, image.Image):
                 img = image.Image(
                     self.imagesManagement.imagePath,
@@ -380,7 +371,6 @@ class App:
                 )
             self.original_image = img
 
-        # Créer une copie de l'image originale
         img_copy = copy.deepcopy(self.original_image)
 
         saturation_processor = processing.contrast()
@@ -463,11 +453,9 @@ class App:
             if not imageName:
                 return
             
-            # Si l'image originale n'a pas encore été copiée, faites-le maintenant
             if self.original_image is None:
                 img = self.imagesManagement.getImage(imageName)
                 
-                # Convertir en hdrCore.image.Image si nécessaire
                 if not isinstance(img, image.Image):
                     img = image.Image(
                         self.imagesManagement.imagePath,
@@ -479,7 +467,6 @@ class App:
                     )
                 self.original_image = img
             
-            # Créer une copie de l'image originale
             img_copy = copy.deepcopy(self.original_image)
 
             saturation_processor = processing.saturation()
