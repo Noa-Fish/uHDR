@@ -691,7 +691,6 @@ class saturation(Processing):
             res.linear = False
             res.colorSpace = image.ColorSpace.build('Lch')
         end = timer()
-        print(" [PROCESS-PROFILING] (",end - start,")>> saturation(",img.name,"):", kwargs)
         return res
 # -----------------------------------------------------------------------------
 # --- Class colorEditor ------------------------------------------------------

@@ -91,6 +91,10 @@ class App:
         self.currentExposureValue = 0
         self.exposureActive = True
         
+        self.defaultSaturationValue = 0
+        self.currentSaturationValue = 0
+        self.saturationActive = True
+        
         ## callbacks
         self.mainWindow.dirSelected.connect(self.CBdirSelected)
         self.mainWindow.requestImages.connect(self.CBrequestImages)
@@ -106,7 +110,10 @@ class App:
         self.mainWindow.editBlock.edit.lightEdit.light.exposure.autoClicked.connect(self.CBexposureautoChanged)
         self.mainWindow.editBlock.edit.lightEdit.light.exposure.valueChanged.connect(self.CBexposureChanged)
         
+        self.mainWindow.editBlock.edit.lightEdit.light.saturation.activeToggled.connect(self.CBsaturationactiveChanged)
+        self.mainWindow.editBlock.edit.lightEdit.light.saturation.autoClicked.connect(self.CBsaturationautoChanged)
         self.mainWindow.editBlock.edit.lightEdit.light.saturation.valueChanged.connect(self.CBsaturationChanged)
+        
         self.mainWindow.editBlock.edit.lightEdit.light.curve.curveChanged.connect(self.CBcurveChanged) 
 
         self.mainWindow.setPrefs()
@@ -293,48 +300,6 @@ class App:
                 self.mainWindow.setEditorImage(processed_image.colorData)
             else:
                 print(f"Unexpected processed image type: {type(processed_image)}")
-### saturation changed
-# ------------------------------------------------------------------------------------------
-    def CBsaturationChanged(self, value):
-        print(f"adjustSaturation called with value: {value}")
-        
-        if self.selectedImageIdx is None:
-            return
-        
-        imageName = self.selectionMap.selectedIndexToImageName(self.selectedImageIdx)
-        print(f"Selected image name: {imageName}")
-        
-        if not imageName:
-            return
-        
-        # Si l'image originale n'a pas encore été copiée, faites-le maintenant
-        if self.original_image is None:
-            img = self.imagesManagement.getImage(imageName)
-            
-            # Convertir en hdrCore.image.Image si nécessaire
-            if not isinstance(img, image.Image):
-                img = image.Image(
-                    self.imagesManagement.imagePath,
-                    imageName,
-                    img,
-                    image.imageType.SDR,
-                    False,
-                    image.ColorSpace.sRGB()
-                )
-            self.original_image = img
-        
-        # Créer une copie de l'image originale
-        img_copy = copy.deepcopy(self.original_image)
-
-        saturation_processor = processing.saturation()
-        processed_image = saturation_processor.compute(img_copy, saturation=value)
-
-        if isinstance(processed_image, image.Image):
-            print(f"Processed image type is correct")
-            self.imagesManagement.images[imageName] = processed_image.colorData
-            self.mainWindow.setEditorImage(processed_image.colorData)
-        else:
-            print(f"Unexpected processed image type: {type(processed_image)}")
 ### curve & data changed
 # ------------------------------------------------------------------------------------------
     def CBcurveChanged(self, controlPoints):
@@ -478,3 +443,66 @@ class App:
         else:
             # Lorsque activé, utiliser la valeur actuelle
             self.CBexposureChanged(self.currentExposureValue)
+    ### saturation changed
+# ------------------------------------------------------------------------------------------
+    def CBsaturationChanged(self, value):
+        
+        print(f"adjustSaturation called with value: {value} AND saturationActive: {self.saturationActive}")
+        defaut = False
+        if self.saturationActive == False:
+            self.currentSaturationValue = value
+        if self.saturationActive == False and value==0:
+            defaut = True
+        if defaut or self.saturationActive :
+            if self.selectedImageIdx is None:
+                return
+            
+            imageName = self.selectionMap.selectedIndexToImageName(self.selectedImageIdx)
+                
+            if not imageName:
+                return
+            
+            # Si l'image originale n'a pas encore été copiée, faites-le maintenant
+            if self.original_image is None:
+                img = self.imagesManagement.getImage(imageName)
+                
+                # Convertir en hdrCore.image.Image si nécessaire
+                if not isinstance(img, image.Image):
+                    img = image.Image(
+                        self.imagesManagement.imagePath,
+                        imageName,
+                        img,
+                        image.imageType.SDR,
+                        False,
+                        image.ColorSpace.sRGB()
+                    )
+                self.original_image = img
+            
+            # Créer une copie de l'image originale
+            img_copy = copy.deepcopy(self.original_image)
+
+            saturation_processor = processing.saturation()
+            processed_image = saturation_processor.compute(img_copy, saturation=value)
+
+            if isinstance(processed_image, image.Image):
+                self.imagesManagement.images[imageName] = processed_image.colorData
+                self.mainWindow.setEditorImage(processed_image.colorData)
+            else:
+                print(f"Unexpected processed image type: {type(processed_image)}")
+
+    def CBsaturationactiveChanged(self, active):
+        print(f"ToggleActive {self.saturationActive}")
+        self.saturationActive = active
+        if not active:
+            # Lorsque désactivé, utiliser la valeur par défaut
+            self.CBsaturationChanged(self.defaultSaturationValue)
+        else:
+            # Lorsque activé, utiliser la valeur actuelle
+            self.CBsaturationChanged(self.currentSaturationValue)
+
+    def CBsaturationautoChanged(self):
+        print(f"adjustSaturationAuto clicked")
+        # Logic for automatic saturation adjustment can be implemented here
+        pass
+
+
